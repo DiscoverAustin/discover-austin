@@ -1,14 +1,9 @@
 import React from 'react';
 
-export default class PageTwo extends React.Component {
-
-  constructor() {
-    super();
-  }
-
-  render = () => (
+const PageTwo = () => (
     <div>
-      <h1>Page Two!!</h1>
+      <h1>PageTwo!!</h1>
     </div>
-  );
-};
+);
+
+export default PageTwo;

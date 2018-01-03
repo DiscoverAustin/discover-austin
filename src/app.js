@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import MainPage from './mainPage';
 import PageTwo from './pageTwo';
 import NotFoundPage from './notFoundPage';
