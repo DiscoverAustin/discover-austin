@@ -1,0 +1,33 @@
+body {
+	background: #d9d9db;
+}
+
+.navbar {
+  height: 55px;
+  background: #dee2e8;
+}
+
+.iconcontainer {
+  float: left;
+  margin-left: 5px;
+  width: 35px;
+}
+
+.iconcontainer :hover {
+  cursor: pointer;
+}
+
+.icon {
+    width: 35px;
+    height: 7px;
+    background-color: black;
+    margin: 8px 0;
+}
+
+.title {
+  width: 180px;
+  float: left;
+  margin-left: 90px;
+  margin-top: 12px;
+  font-size: 25px;  
+}
