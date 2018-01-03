@@ -1,4 +1,5 @@
 import React from 'react';
+import Nav from './Navbar.js';
 
 export default class MainPage extends React.Component {
 
@@ -8,7 +9,7 @@ export default class MainPage extends React.Component {
 
   render = () => (
     <div>
-      <h1>Main Page!</h1>
+      <Nav />
     </div>
   );
 };

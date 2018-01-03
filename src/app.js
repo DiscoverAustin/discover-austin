@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import MainPage from './mainPage';
-import PageTwo from './pageTwo';
+import Leaderboard from './pageTwo';
 import NotFoundPage from './notFoundPage';
 
 const App = () => (
@@ -10,7 +10,7 @@ const App = () => (
     <BrowserRouter>
       <Switch>
         <Route path='/' component={ MainPage } exact={ true } ></Route>
-        <Route path='/two' component={ PageTwo }></Route>
+        <Route path='/two' component={ Leaderboard }></Route>
         <Route component={ NotFoundPage }></Route>
       </Switch>
     </BrowserRouter>
