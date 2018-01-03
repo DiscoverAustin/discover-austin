@@ -15,6 +15,10 @@ app.use(bodyParser.json());
 
 /*--------- GET Handlers ----------*/
 
+app.get('/src/styles/styles.css', (req, res) => {
+  res.sendFile(path.join(CLIENT_DIR, 'styles/styles.css'));
+});
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(DIST_DIR, 'index.html'));
 });
