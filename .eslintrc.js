@@ -22,8 +22,9 @@ module.exports = {
     "strict": [2, "never"],
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
-    "react/react-in-jsx-scope": 2
+    "react/react-in-jsx-scope": 2,
+    "no-console":0
   },
-  
+
   "plugins": [ "react" ]
 };
