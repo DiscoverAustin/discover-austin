@@ -1,11 +1,9 @@
-
 import React from 'react';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 
-
 const Nav = (props) => {
-  
   return (
+
     <div>
 	    <div className="navbar">
         <div className="iconcontainer" onClick={props.toggleMenu} >

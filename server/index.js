@@ -19,6 +19,10 @@ app.get('/src/styles/styles.css', (req, res) => {
   res.sendFile(path.join(CLIENT_DIR, 'styles/styles.css'));
 });
 
+app.get('/src/styles/leaflet.css', (req, res) => {
+  res.sendFile(path.join(CLIENT_DIR, 'styles/leaflet.css'));
+});
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(DIST_DIR, 'index.html'));
 });

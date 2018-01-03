@@ -1,7 +1,15 @@
+
+
 .navbar {
   height: 55px;
   width: 100%;
   background: #dee2e8;
+}
+
+.leaflet-container {
+    height: 400px;
+    width: 75%;
+    margin: 0 auto;
 }
 
 .iconcontainer {
@@ -51,6 +59,8 @@
 
 .option:hover {
   cursor: pointer;
+  margin-top: 12px;
+  font-size: 25px;
 }
 
 
@@ -69,3 +79,4 @@
 }
 
 
+}
