@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 
 
 const Nav = (props) => {
@@ -16,8 +17,8 @@ const Nav = (props) => {
       </div>
       {props.showMenu ? 
       <div className="menu">
-        <div className="option" id="link1">Profile</div>
-        <div className="option" id="link2">Leaderboard</div>
+        <Link to="/three"><div className="option" id="link1">Profile</div></Link>
+        <Link to="/two"><div className="option" id="link2">Leaderboard</div></Link>
         <div className="option" id="link3">Logout</div>
       </div> : null}
     </div>

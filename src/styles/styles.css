@@ -46,6 +46,11 @@
   border-right: 2px solid black;
   padding: 3px 0 0 10px;
   font-size: 20px;
+  color: black;
+}
+
+.option:hover {
+  cursor: pointer;
 }
 
 
