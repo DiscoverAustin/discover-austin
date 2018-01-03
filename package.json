@@ -4,9 +4,10 @@
   "description": "A gamified, geolocation-based, mobile-first web application to help Austinities &amp; Tourists alike discover new spots around town",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./test/run.sh",
     "build": "webpack --watch",
-    "start": "nodemon server"
+    "start": "nodemon server",
+    "lint": "./node_modules/.bin/eslint ."
   },
   "repository": {
     "type": "git",
