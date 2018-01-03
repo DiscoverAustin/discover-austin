@@ -6,7 +6,7 @@ const Nav = (props) => {
   
   return (
 	<div className="navbar">
-      <div className="iconcontainer">
+      <div className="iconcontainer" onClick={props.toggleMenu} >
         <div className="icon"></div>
         <div className="icon"></div>
         <div className="icon"></div>
