@@ -23,11 +23,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(DIST_DIR, 'index.html'));
 });
 
-
-// app.get('*', (req, res) => {
-//   res.end('404');
-// });
-
 /*--------- POST Handlers ----------*/
 
 app.listen(port, () => {
