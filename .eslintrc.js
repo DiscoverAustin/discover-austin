@@ -9,7 +9,7 @@ module.exports = {
         "modules": true
     }
   },
-    
+
   "parser": "babel-eslint",
   "env": {
     "browser": true,
@@ -22,8 +22,10 @@ module.exports = {
     "strict": [2, "never"],
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
-    "react/react-in-jsx-scope": 2
+    "react/react-in-jsx-scope": 2,
+    "no-console": "off",
+    "react/prefer-stateless-function": [2, { "ignorePureComponents": true }]
   },
-  
+
   "plugins": [ "react" ]
 };
