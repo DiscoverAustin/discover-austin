@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class PageTwo extends React.Component {
+export default class Leaderboard extends React.Component {
 
   constructor() {
     super();
@@ -8,7 +8,7 @@ export default class PageTwo extends React.Component {
 
   render = () => (
     <div>
-      <h1>Page Two!!</h1>
+      <h1>Leaderboard</h1>
     </div>
   );
 };

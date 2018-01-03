@@ -1,5 +1,6 @@
 import React from 'react';
-import MapPage from './map/map.jsx';
+import Nav from './Navbar.js';
+import MapPage from './Map.js';
 
 export default class MainPage extends React.Component {
 
@@ -9,7 +10,8 @@ export default class MainPage extends React.Component {
 
   render = () => (
     <div>
-      <h1>Main Page!</h1>
+      <Nav />
+      <MapPage />
     </div>
   );
 };
