@@ -15,6 +15,7 @@ const App = () => (
       </Switch>
     </BrowserRouter>
   </div>
+  <div></div>
 );
 
 ReactDOM.render(<App />, document.getElementById('app'));
