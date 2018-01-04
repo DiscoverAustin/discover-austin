@@ -1,6 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const path = require('path');
 const morgan = require('morgan');
 const passport = require('passport');
@@ -12,22 +13,56 @@ const CLIENT_SECRET = require('./secrets/secrets.js');
 
 const app = express();
 const port = process.env.PORT || 3000;
-const APP_DOMAIN = process.env.DOMAIN || `http://localhost:${3000}`;
+const APP_DOMAIN = process.env.DOMAIN || `http://localhost:${port}`;
+
+const sessionOptions = {
+  saveUninitialized: true,
+  resave: true,
+  // store: sessionStore,
+  secret: 'Was zum Teufel!',
+  cookie: { httpOnly: true, maxAge: 2419200000 },
+};
+
+app.use(express.static(DIST_DIR));
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(session(sessionOptions));
+app.use(passport.initialize());
+app.use(passport.session());
 
 passport.use(new FacebookStrategy({
   clientID: '158163551574274',
   clientSecret: CLIENT_SECRET,
   callbackURL: `${APP_DOMAIN}/auth/facebook/callback`,
+  profileFields: ['first_name', 'last_name'],
+  enableProof: true,
+}, (accessToken, refreshToken, profile, done) => {
+  console.log('new profile!: ', profile);
+  done(null, 'true');
 }));
-
-app.use(express.static(DIST_DIR));
-app.use(morgan('dev'));
-app.use(bodyParser.json());
 
 /* --------- GET Handlers ---------- */
 
 app.get('/src/styles/styles.css', (req, res) => {
   res.sendFile(path.join(CLIENT_DIR, 'styles/styles.css'));
+});
+
+app.get('/auth/facebook', passport.authenticate('facebook', {
+  authType: 'rerequest',
+  scope: ['email', 'public_profile'],
+}));
+
+app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+  failureRedirect: '/login',
+}), (req, res) => { res.redirect('/'); });
+
+app.get('/hahah', (req, res) => {
+  res.send('bahahaha').end('hahaha');
+});
+
+app.get('/login', (req, res) => {
+  res.send('lol wrong').end('lolol wrong');
 });
 
 app.get('*', (req, res) => {
