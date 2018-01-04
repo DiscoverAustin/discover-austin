@@ -23,9 +23,48 @@ app.get('/src/styles/leaflet.css', (req, res) => {
   res.sendFile(path.join(CLIENT_DIR, 'styles/leaflet.css'));
 });
 
+/* --------- API Routes ---------- */
+
+app.get('/api/leaderboard', (req, res) => {
+  const leaders = [
+    {
+      name: 'Bob',
+      score: 1,
+    }, {
+      name: 'Bobby',
+      score: 2,
+    }, {
+      name: 'Rob',
+      score: 10,
+    }, {
+      name: 'Robert',
+      score: 12,
+    }, {
+      name: 'Bobbina',
+      score: 14,
+    }, {
+      name: 'Bobber',
+      score: 119,
+    }, {
+      name: 'Billy Bob',
+      score: 205,
+    }, {
+      name: 'Bob the Builder',
+      score: 1000,
+    },
+  ];
+  const stringifiedLeaders = JSON.stringify(leaders);
+  res.send(stringifiedLeaders).status(201).end();
+});
+
+/* --------- POST Handlers ---------- */
+
+
+// Default route fallback (allows React Router to handle routing)
 app.get('*', (req, res) => {
   res.sendFile(path.join(DIST_DIR, 'index.html'));
 });
+
 
 /* --------- POST Handlers ---------- */
 
