@@ -1,14 +1,9 @@
 import React from 'react';
 
-export default class Profile extends React.Component {
-
-  constructor() {
-    super();
-  }
-
-  render = () => (
+const Profile = () => (
     <div>
       <h1>Profile</h1>
     </div>
-  );
-};
+);
+
+export default Profile;
