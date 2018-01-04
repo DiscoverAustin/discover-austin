@@ -99,7 +99,6 @@ a, a:visited, a:hover, a:active {
 }
 
 .challengescontainer {
-  border: 1px solid black;
   margin: auto;
   width: 85%;
   display: flex;
