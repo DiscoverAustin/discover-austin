@@ -14,6 +14,7 @@ body {
     height: 400px;
     width: 75%;
     margin: 0 auto;
+    z-index: 1;
 }
 
 .iconcontainer {
@@ -45,6 +46,8 @@ body {
 .menu {
   margin-top: -20px;
   width: 180px;
+  position: absolute;
+  z-index: 2;
 }
 
 #link1 {
