@@ -48,6 +48,10 @@ app.get('/src/styles/styles.css', (req, res) => {
   res.sendFile(path.join(CLIENT_DIR, 'styles/styles.css'));
 });
 
+app.get('/src/styles/leaflet.css', (req, res) => {
+  res.sendFile(path.join(CLIENT_DIR, 'styles/leaflet.css'));
+});
+
 app.get('/auth/facebook', passport.authenticate('facebook', {
   authType: 'rerequest',
   scope: ['email', 'public_profile'],
@@ -65,9 +69,48 @@ app.get('/login', (req, res) => {
   res.send('lol wrong').end('lolol wrong');
 });
 
+/* --------- API Routes ---------- */
+
+app.get('/api/leaderboard', (req, res) => {
+  const leaders = [
+    {
+      name: 'Bob',
+      score: 1,
+    }, {
+      name: 'Bobby',
+      score: 2,
+    }, {
+      name: 'Rob',
+      score: 10,
+    }, {
+      name: 'Robert',
+      score: 12,
+    }, {
+      name: 'Bobbina',
+      score: 14,
+    }, {
+      name: 'Bobber',
+      score: 119,
+    }, {
+      name: 'Billy Bob',
+      score: 205,
+    }, {
+      name: 'Bob the Builder',
+      score: 1000,
+    },
+  ];
+  const stringifiedLeaders = JSON.stringify(leaders);
+  res.send(stringifiedLeaders).status(201).end();
+});
+
+/* --------- POST Handlers ---------- */
+
+
+// Default route fallback (allows React Router to handle routing)
 app.get('*', (req, res) => {
   res.sendFile(path.join(DIST_DIR, 'index.html'));
 });
+
 
 /* --------- POST Handlers ---------- */
 
