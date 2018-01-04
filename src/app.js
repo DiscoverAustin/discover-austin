@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import MainPage from './mainPage';
-import Leaderboard from './pageTwo';
+import Leaderboard from './leaderboard';
 import Profile from './pageThree';
 import NotFoundPage from './notFoundPage';
 

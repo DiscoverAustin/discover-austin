@@ -13,8 +13,9 @@ const Nav = props => (
       </div>
       {props.showMenu ?
       <div className="menu">
-        <Link to="/three"><div className="option" id="link1">Profile</div></Link>
-        <Link to="/two"><div className="option" id="link2">Leaderboard</div></Link>
+        <Link to="/"><div className="option" id="link1">Home</div></Link>
+        <Link to="/three"><div className="option">Profile</div></Link>
+        <Link to="/two"><div className="option">Leaderboard</div></Link>
         <div className="option" id="link3">Logout</div>
       </div> : null}
     </div>
