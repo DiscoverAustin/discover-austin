@@ -1,9 +1,26 @@
 import React from 'react';
+import Nav from './Navbar';
+import MapPage from './Map';
 
-const MainPage = () => (
+export default class MainPage extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      showMenu: false,
+    };
+    this.toggleMenu = this.toggleMenu.bind(this);
+  }
+
+  toggleMenu() {
+    this.setState({
+      showMenu: !this.state.showMenu,
+    });
+  }
+
+  render = () => (
     <div>
-      <h1>Main Page!</h1>
+      <Nav showMenu={this.state.showMenu} toggleMenu={this.toggleMenu} />
+      <MapPage />
     </div>
-);
-
-export default MainPage;
+  )
+}

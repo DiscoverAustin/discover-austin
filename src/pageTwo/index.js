@@ -1,9 +1,10 @@
 import React from 'react';
 
-const PageTwo = () => (
+
+const Leaderboard = () => (
     <div>
-      <h1>PageTwo!!</h1>
+      <h1>Leaderboard</h1>
     </div>
 );
 
-export default PageTwo;
+export default Leaderboard;
