@@ -4,6 +4,7 @@
   height: 55px;
   width: 100%;
   background: #dee2e8;
+  background: gray;
 }
 
 .leaflet-container {
@@ -40,27 +41,35 @@
 
 .menu {
   margin-top: -20px;
+  width: 180px;
 }
 
 #link1 {
   border-top: 2px solid black;
 }
 
+a, a:visited, a:hover, a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
 .option {
   width: 180px;
   height: 40px;
   background: #dee2e8;
+  background: gray;
   border-bottom: 2px solid black;
   border-right: 2px solid black;
   padding: 3px 0 0 10px;
   font-size: 20px;
   color: black;
+  text-decoration: none !important;
 }
 
 .option:hover {
   cursor: pointer;
-  margin-top: 12px;
-  font-size: 25px;
+  text-decoration: none !important;
+  color: blue;
 }
 
 
