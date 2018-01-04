@@ -9,7 +9,7 @@ export default class MapPage extends React.Component {
     this.state = {
       lat: 51.505,
       lng: -0.09,
-      zoom: 13
+      zoom: 13,
     };
   }
 

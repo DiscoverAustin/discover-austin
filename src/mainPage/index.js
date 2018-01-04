@@ -1,21 +1,20 @@
 import React from 'react';
-import Nav from './Navbar.js';
-import MapPage from './Map.js';
+import Nav from './Navbar';
+import MapPage from './Map';
 
 export default class MainPage extends React.Component {
-
   constructor() {
     super();
     this.state = {
-    	showMenu: false
-    }
+      showMenu: false,
+    };
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   toggleMenu() {
-  	this.setState({
-  		showMenu: !this.state.showMenu
-  	});
+    this.setState({
+      showMenu: !this.state.showMenu,
+    });
   }
 
   render = () => (
@@ -23,5 +22,5 @@ export default class MainPage extends React.Component {
       <Nav showMenu={this.state.showMenu} toggleMenu={this.toggleMenu} />
       <MapPage />
     </div>
-  );
-};
+  )
+}
