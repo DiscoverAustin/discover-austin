@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const Leaderboard = () => (
     <div>
       <h1>Leaderboard</h1>
