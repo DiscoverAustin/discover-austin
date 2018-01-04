@@ -9,7 +9,7 @@ const Nav = props => (
           <div className="icon"></div>
           <div className="icon"></div>
         </div>
-        <div className="title">Discover Austin!</div>
+        <div className="navtitle">Discover Austin!</div>
       </div>
       {props.showMenu ?
       <div className="menu">
