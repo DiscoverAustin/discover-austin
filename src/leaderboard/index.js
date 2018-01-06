@@ -9,20 +9,19 @@ export default class Leaderboard extends React.Component {
     super();
     this.state = {
       showMenu: false,
-      leaders: [
-        { name: 'Mario', points: 1250 },
-        { name: 'Luigi', points: 975 },
-        { name: 'Princess Peach', points: 825 },
-        { name: 'Yoshi', points: 600 },
-        { name: 'Bowser', points: 400 },
-        { name: 'Wario', points: 250 },
-      ],
+      leaders: [],
     };
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   componentWillMount = () => {
-    axios.get('http://localhost:3000/api/leaderboard').then((res) => { console.log(res); });
+    axios.get('http://localhost:3000/api/leaderboard')
+      .then((res) => {
+        this.setState({
+          leaders: res.data,
+        });
+      })
+      .catch(e => console.log(e));
   }
 
   toggleMenu() {
@@ -36,7 +35,7 @@ export default class Leaderboard extends React.Component {
       <Nav showMenu={this.state.showMenu} toggleMenu={this.toggleMenu} />
       <h1 className="pagetitle">Leaderboard</h1>
       {this.state.leaders.map((leader, index) => (
-        <Leaders leader={leader} index={index} />
+        <Leaders leader={leader} index={index} key={index} />
       ))}
     </div>
   )
