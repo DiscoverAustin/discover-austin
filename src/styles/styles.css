@@ -114,6 +114,7 @@ a, a:visited, a:hover, a:active {
   width: 30%;
   height: 140px;
   margin-bottom: 80px;
+  cursor: pointer;
 }
 
 .challengebox h3, h2 {

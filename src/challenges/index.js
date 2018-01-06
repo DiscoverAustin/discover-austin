@@ -29,8 +29,8 @@ export default class Challenges extends React.Component {
       <Nav showMenu={this.state.showMenu} toggleMenu={this.toggleMenu} />
       <h1 className="pagetitle">Challenges</h1>
       <div className="challengescontainer">
-        {this.state.challenges.map(challenge => (
-        <div className="challengebox"><h3>{challenge.name}</h3><h2>{challenge.points}</h2></div>))}
+        {this.state.challenges.map((challenge, index) => (
+        <div className="challengebox" key={index} ><a href={challenge.url} ><h3>{challenge.name}</h3><h2>{challenge.points}</h2></a></div>))}
       </div>
     </div>
   );
