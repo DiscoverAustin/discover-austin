@@ -5,6 +5,17 @@ const morgan = require('morgan');
 
 const app = express();
 
+/*
+   This block below allows both express-http requests &
+   socket.io socket connections to be simultaneously served:
+*/
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+const socket = require('./sockets');
+
+socket(io);
+
+
 const DIST_DIR = path.join(__dirname, '../dist');
 const CLIENT_DIR = path.join(__dirname, '../src/');
 const port = process.env.PORT || 3000;
@@ -52,7 +63,7 @@ app.get('/api/leaderboard', (req, res) => {
       name: 'Bob the Builder',
       score: 1000,
     },
-  ];
+  ].sort((a, b) => b.score - a.score);
   const stringifiedLeaders = JSON.stringify(leaders);
   res.send(stringifiedLeaders).status(201).end();
 });
@@ -66,8 +77,6 @@ app.get('*', (req, res) => {
 });
 
 
-/* --------- POST Handlers ---------- */
-
-app.listen(port, () => {
+http.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
