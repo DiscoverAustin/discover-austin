@@ -9,23 +9,19 @@ export default class Leaderboard extends React.Component {
     super();
     this.state = {
       showMenu: false,
-      leaders: []
+      leaders: [],
     };
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   componentWillMount = () => {
     axios.get('http://localhost:3000/api/leaderboard')
-    .then((res) => {
-      this.setState({
-        leaders: res.data
+      .then((res) => {
+        this.setState({
+          leaders: res.data,
+        });
       })
-    })
-    .catch(e => console.log(e));
-  }
-
-  clickName() {
-    console.log('clickName function running');
+      .catch(e => console.log(e));
   }
 
   toggleMenu() {
