@@ -19,7 +19,7 @@ $ npm run build                 # Spins up Webpack, with hot-reloading
 
  To run the linting tests locally, run the following command in your terminal:
 
- ```bash
+ ```bash 
  $ npm run lint
  ```
 For more information about the Airbnb JavaScript Style Guide, check out https://github.com/airbnb/javascript. For more information about TravisCI, check out https://docs.travis-ci.com/user/getting-started/.
