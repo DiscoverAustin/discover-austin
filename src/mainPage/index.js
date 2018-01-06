@@ -9,9 +9,9 @@ export default class MainPage extends React.Component {
     this.state = {
       showMenu: false,
       feed: [
-        { name: 'Stephen Hawking', achievement: 'Barton Springs' },
-        { name: 'Nathan C', achievement: 'Chipotle' },
-        { name: 'Batman', achievement: 'Save Gotham' },
+        { name: 'Stephen Hawking', achievement: 'Barton Springs', yelp: 'https://www.yelp.com/biz/barton-springs-pool-austin' },
+        { name: 'Nathan C', achievement: 'Chipotle', yelp: 'https://www.yelp.com/biz/chipotle-mexican-grill-austin-15?osq=Chipotle+Mexican+Grill' },
+        { name: 'Batman', achievement: 'State Capitol', yelp: 'https://www.yelp.com/biz/hack-reactor-austin-austin' },
       ],
     };
     this.toggleMenu = this.toggleMenu.bind(this);

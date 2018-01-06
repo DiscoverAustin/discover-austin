@@ -9,7 +9,7 @@ const Feed = props => (
         <Link to={`/profile/${person.name}`}>
           <span className="user">{person.name}</span>
         </Link> has unlocked the
-        <span className="achievement"> {person.achievement}</span> achievement
+        <span className="achievement"><a href={person.yelp} target="_blank"> {person.achievement}</a></span> achievement
       </p>
     </div>
   ))}
