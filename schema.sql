@@ -1,13 +1,15 @@
-DROP DATABASE IF EXISTS discoveraustin;
+DROP DATABASE IF EXISTS discoverAustin;
 
-CREATE DATABASE discoveraustin;
+CREATE DATABASE discoverAustin;
 
-USE discoveraustin;
+USE discoverAustin;
 
 CREATE TABLE Users (
   id int NOT NULL AUTO_INCREMENT,
   name varchar(50) NOT NULL,
   email varchar(50) NOT NULL UNIQUE,
+  facebookId NOT NULL UNIQUE,
+  pictureUrl varchar(100) NOT NULL,
   PRIMARY KEY (ID)
 );
 
@@ -38,15 +40,7 @@ CREATE TABLE Users_Achievements (
 
 
 /*  Execute this file from the command line by typing:
- *    mysql -u <USER> < schema.sql
- *    OR
- *    mysql -u <USER> -p < schema.sql
- *  For example, on a pairing station, it'll be 
- *    mysql -u student -p < schema.sql
- *  and then you'll have to enter the password, student
- *  On your personal computer, if you haven't set up
- *  a password, it'll be 
- *    mysql -u root < schema.sql
+ *    mysql -u root -p < schema.sql
 */
 
 INSERT INTO Categories (id, name) VALUES (1, 'Austin Landmarks');
@@ -86,12 +80,3 @@ INSERT INTO Users_Achievements (id, user_id, achievement_id, date) VALUES (16, 5
 INSERT INTO Users_Achievements (id, user_id, achievement_id, date) VALUES (17, 5, 2, '2017-08-27');
 INSERT INTO Users_Achievements (id, user_id, achievement_id, date) VALUES (18, 2, 2, '2017-08-16');
 INSERT INTO Users_Achievements (id, user_id, achievement_id, date) VALUES (19, 3, 3, '2017-08-16');
-
-
-
-
-
-
-
-
-
