@@ -7,6 +7,17 @@ const morgan = require('morgan');
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 
+/*
+   This block below allows both express-http requests &
+   socket.io socket connections to be simultaneously served:
+*/
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+const socket = require('./sockets');
+
+socket(io);
+
+
 const DIST_DIR = path.join(__dirname, '../dist');
 const CLIENT_DIR = path.join(__dirname, '../src/');
 const CLIENT_SECRET = require('./secrets/secrets.js');
@@ -112,8 +123,6 @@ app.get('*', (req, res) => {
 });
 
 
-/* --------- POST Handlers ---------- */
-
-app.listen(port, () => {
+http.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
