@@ -36,6 +36,7 @@
     "passport-facebook": "^2.1.1",
     "leaflet": "^1.2.0",
     "morgan": "^1.9.0",
+    "mysql": "^2.15.0",
     "nodemon": "^1.14.7",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",

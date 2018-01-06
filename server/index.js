@@ -98,7 +98,7 @@ app.get('/api/leaderboard', (req, res) => {
       name: 'Bob the Builder',
       score: 1000,
     },
-  ];
+  ].sort((a, b) => b.score - a.score);
   const stringifiedLeaders = JSON.stringify(leaders);
   res.send(stringifiedLeaders).status(201).end();
 });
