@@ -1,6 +1,8 @@
 const mysql = require('mysql');
 const mysqlConfig = require('./config.js');
 
+console.log('lol');
+
 const connection = mysql.createConnection(mysqlConfig);
 
 const getAllUsers = () => (

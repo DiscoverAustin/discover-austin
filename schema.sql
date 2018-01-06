@@ -8,8 +8,8 @@ CREATE TABLE Users (
   id int NOT NULL AUTO_INCREMENT,
   name varchar(50) NOT NULL,
   email varchar(50) NOT NULL UNIQUE,
-  facebookId NOT NULL UNIQUE,
-  pictureUrl varchar(100) NOT NULL,
+  facebookId int UNIQUE,
+  pictureUrl varchar(100),
   PRIMARY KEY (ID)
 );
 
