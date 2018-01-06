@@ -78,6 +78,17 @@ a, a:visited, a:hover, a:active {
   color: blue;
 }
 
+.feed {
+  margin-top: 20px;
+}
+
+.feeditem {
+  margin: auto;
+  text-align: center;
+  border-bottom: 1px solid black;
+  width: 75%;
+}
+
 .pagetitle {
   text-align: center;
   margin: 30px 0;
@@ -90,8 +101,12 @@ a, a:visited, a:hover, a:active {
   margin: auto;
   overflow: ;
 }
-.user {
+.user, .achievement {
   font-weight: bold;
+}
+
+.leaders .score {
+  float: right;
 }
 
 .score {
@@ -162,7 +177,8 @@ a, a:visited, a:hover, a:active {
   }
 
   .challengebox {
-    width: 90%;
+    width: 80%;
+    margin-bottom: 10px;
   }
 }
 
