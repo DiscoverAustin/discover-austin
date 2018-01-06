@@ -24,6 +24,10 @@ export default class Leaderboard extends React.Component {
     .catch(e => console.log(e));
   }
 
+  clickName() {
+    console.log('clickName function running');
+  }
+
   toggleMenu() {
     this.setState({
       showMenu: !this.state.showMenu,
