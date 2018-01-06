@@ -12,11 +12,22 @@ const connection = mysql.createConnection(mysqlConfig)
 const getAllUsers = () => (
   connection
     .then(db => db.query('SELECT * FROM users'))
-    .catch((e) => { throw (e); })
+    .catch((e) => {
+      console.error('Error retreiving from database!: ', e);
+      throw (e);
+    })
 );
 
-// const getUserInfo = ()
+const getUserInfo = id => (
+  connection
+    .then(db => db.query(`SELECT * FROM users WHERE id = ${id}`))
+    .catch((e) => {
+      console.error('Error retreiving from database!: ', e);
+      throw (e);
+    })
+);
 
 module.exports = {
   getAllUsers,
+  getUserInfo,
 };

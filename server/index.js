@@ -119,10 +119,18 @@ app.get('/api/leaderboard', (req, res) => {
 });
 
 app.get('/api/getUserInfo', (req, res) => {
+  const { id } = req.body;
+  db.getUserInfo(id)
+    .then((user) => { res.send(user); })
+    .catch((e) => { console.error(e); });
+});
+
+app.get('/api/getAllUsers', (req, res) => {
   db.getAllUsers()
     .then((users) => { res.send(users); })
     .catch((e) => { console.error(e); });
 });
+
 
 /* --------- POST Handlers ---------- */
 

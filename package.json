@@ -6,8 +6,9 @@
   "scripts": {
     "test": "./test/run.sh",
     "build": "webpack --watch",
+    "start": "nodemon server",
     "db": "mysql -u root < schema.sql",
-    "start": "npm run db && nodemon server",
+    "dev-start": "npm run db && npm start",
     "lint": "./node_modules/.bin/eslint ."
   },
   "repository": {
