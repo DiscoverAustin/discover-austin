@@ -4,7 +4,7 @@ const Leaders = props => (
   <section>
     <div>
       <p className="leaders">
-        {props.index + 1}. <span className="user">{props.leader.name}</span> <span className="score">{props.leader.points}</span>
+        {props.index + 1}. <span className="user">{props.leader.name}</span> <span className="score">{props.leader.score}</span>
       </p>
     </div>
   </section>
