@@ -1,18 +1,21 @@
-const mysql = require('mysql');
+const mysql = require('promise-mysql');
 const mysqlConfig = require('./config.js');
 
-console.log('lol');
+const connection = mysql.createConnection(mysqlConfig)
+  .then((conn) => {
+    console.log('Successfully connected to mysql database!');
+    return conn;
+  })
+  .catch(e => console.error('Error connecting to mysql database!: ', e.stack));
 
-const connection = mysql.createConnection(mysqlConfig);
 
 const getAllUsers = () => (
-  new Promise((resolve, reject) => {
-    connection.query('SELECT * FROM users', (err, res) => {
-      if (err) { reject(err); }
-      resolve(res);
-    });
-  })
+  connection
+    .then(db => db.query('SELECT * FROM users'))
+    .catch((e) => { throw (e); })
 );
+
+// const getUserInfo = ()
 
 module.exports = {
   getAllUsers,

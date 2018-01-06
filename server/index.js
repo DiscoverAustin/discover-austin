@@ -118,6 +118,12 @@ app.get('/api/leaderboard', (req, res) => {
   res.send(stringifiedLeaders).status(201).end();
 });
 
+app.get('/api/getUserInfo', (req, res) => {
+  db.getAllUsers()
+    .then((users) => { res.send(users); })
+    .catch((e) => { console.error(e); });
+});
+
 /* --------- POST Handlers ---------- */
 
 
