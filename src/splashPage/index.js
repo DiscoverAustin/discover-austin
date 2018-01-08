@@ -1,8 +1,41 @@
 import React from 'react';
 
-const Splash = () => (
+export default class Splash extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      showMenu: false,
+    };
+    this.toggleMenu = this.toggleMenu.bind(this);
+  }
+
+  toggleMenu() {
+    this.setState({
+      showMenu: !this.state.showMenu,
+    });
+  }
+
+  render = () => (
   <div className="splash-main-container">
     <section className="splash-top-bar">
+
+      <div className="navbar-wrapper">
+        <div className="navbar">
+          <div className="iconcontainer" onClick={this.toggleMenu} >
+            <div className="icon"></div>
+            <div className="icon"></div>
+            <div className="icon"></div>
+          </div>
+          <div className="navtitle">Discover Austin!</div>
+        </div>
+        {this.state.showMenu ?
+        <div className="menu">
+          <div className="option" id="link1">Log in</div>
+          <div className="option">Sign up</div>
+        </div> : null}
+      </div>
+
+
       <div className="splash-top-bar-title">Discover Austin!</div>
       <ul>
         <li>Log in</li>
@@ -18,6 +51,6 @@ const Splash = () => (
       </div>
     </section>
   </div>
-);
+  )
+}
 
-export default Splash;

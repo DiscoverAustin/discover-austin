@@ -7,7 +7,7 @@ body {
   height: 55px;
   width: 100%;
 /*  background: #dee2e8;*/
-  background: gray;
+  background: #fff;
 }
 
 .leaflet-container {
@@ -58,7 +58,7 @@ body {
   width: 180px;
   height: 40px;
   background: #dee2e8;
-  background: gray;
+  background: #fff;
   border-bottom: 2px solid black;
   border-right: 2px solid black;
   padding: 3px 0 0 10px;
@@ -113,6 +113,10 @@ body {
 /* ------- Splash page ------------- */
 /* --------------------------------- */
 
+.navbar-wrapper {
+  display: none;
+}
+
 .splash-top-bar {
   background: #fff;
   width: 100%;
@@ -157,6 +161,7 @@ body {
 .splash-banner {
   width: 100%;
   position: relative;
+  background: black;
 }
 
 .splash-banner img {
@@ -180,12 +185,53 @@ body {
 .splash-banner h2 {
   font-size: 25px;
   margin-bottom: 25px;
+  text-align: left;
 }
 
 .splash-banner div a {
   background: #db4c3f;
   padding: 10px 20px;
   margin: auto;
+}
+
+@media only screen and (max-width:765px) {
+  .splash-top-bar-title {
+    left: 100px;
+  }
+
+  .splash-banner div {
+    bottom: 180px;
+    left: 250px;
+  }
+
+  .splash-banner img {
+    opacity: 0.5;
+  }
+}
+
+@media only screen and (max-width:480px) {
+  .navbar-wrapper {
+    display: inline;
+  }
+
+  .splash-top-bar-title {
+    display: none;
+  }
+
+  .splash-top-bar ul {
+    display: none;
+  }
+
+  .splash-banner img {
+    opacity: 0.5;
+    height: 400px;
+  }
+
+  .splash-banner div {
+    width: 100%;
+    left: 70px;
+    bottom: 50px;
+  }
 }
 
 /* --------------------------------- */
