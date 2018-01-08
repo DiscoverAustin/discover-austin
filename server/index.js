@@ -10,12 +10,12 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 
 const db = require('../db');
 
-const app = express();
-
 /*
 This block below allows both express-http requests &
 socket.io socket connections to be simultaneously served:
 */
+const app = express();
+
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const socket = require('./sockets');
