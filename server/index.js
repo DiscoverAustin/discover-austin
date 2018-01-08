@@ -26,6 +26,8 @@ socket(io);
 const DIST_DIR = path.join(__dirname, '../dist');
 const CLIENT_DIR = path.join(__dirname, '../src/');
 
+console.log('CLIENT_SECRET: ', global.CLIENT_SECRET);
+
 const CLIENT_SECRET = global.CLIENT_SECRET ? global.CLIENT_SECRET : require('./secrets/secrets.js');
 
 // const CLIENT_SECRET = GLOBAL.CLIENT_SECRET || require('./secrets/secrets.js');
