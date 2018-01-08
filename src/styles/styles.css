@@ -348,6 +348,7 @@ a, a:visited, a:hover, a:active {
   }
 }
 
+
 @media only screen and (max-width:600px) {
   .menu {
     width: 100%;
