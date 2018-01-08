@@ -8,15 +8,14 @@ const morgan = require('morgan');
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 
-// local files
 const db = require('../db');
 
-/*
-   This block below allows both express-http requests &
-   socket.io socket connections to be simultaneously served:
-*/
 const app = express();
 
+/*
+This block below allows both express-http requests &
+socket.io socket connections to be simultaneously served:
+*/
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const socket = require('./sockets');
@@ -25,8 +24,6 @@ socket(io);
 
 const DIST_DIR = path.join(__dirname, '../dist');
 const CLIENT_DIR = path.join(__dirname, '../src/');
-
-console.log('CLIENT_SECRET: ', global.CLIENT_SECRET);
 
 const CLIENT_SECRET = global.CLIENT_SECRET ? global.CLIENT_SECRET : require('./secrets/secrets.js'); // eslint-disable-line
 
