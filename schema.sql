@@ -8,13 +8,9 @@ CREATE TABLE Users (
   id int NOT NULL AUTO_INCREMENT,
   name varchar(50) NOT NULL,
   email varchar(50) NOT NULL UNIQUE,
-<<<<<<< HEAD
-  facebookId int UNIQUE,
-  pictureUrl varchar(100),
-=======
-  image_url varchar(250) NOT NULL,
+  facebook_id int UNIQUE,
+  picture_url varchar(250),
   total_points int NOT NULL,
->>>>>>> 3a58dcdd30bbebc6f05475c857907142daf4924a
   PRIMARY KEY (ID)
 );
 
@@ -60,12 +56,12 @@ INSERT INTO Achievements (id, category_id, description, points, yelp_url) VALUES
 INSERT INTO Achievements (id, category_id, description, points, yelp_url) VALUES (6, 1, 'Antone\'s Nightclub', 75, 'https://www.yelp.com/biz/antones-nightclub-austin-6');
 INSERT INTO Achievements (id, category_id, description, points, yelp_url) VALUES (7, 2, 'The Blanton Museum', 75, 'https://www.yelp.com/biz/the-blanton-museum-of-art-austin');
 
-INSERT INTO Users (id, name, email, image_url, total_points) VALUES (1, 'Mario', 'redoveralls@yahoo.com', 'https://media.nintendo.com/nintendo/bin/UOIekvv9YnMZx4CpweP-v4HDIzmqag9J/HpMzIWmEi7j1uKqpBXziLb6qOVKkgjco.jpg', 250);
-INSERT INTO Users (id, name, email, image_url, total_points) VALUES (2, 'Luigi', 'greenoveralls@yahoo.com', 'https://static.giantbomb.com/uploads/scale_small/9/99864/2389814-nsmbuluigi.png', 450);
-INSERT INTO Users (id, name, email, image_url, total_points) VALUES (3, 'Princess', 'pinkdress@yahoo.com', 'https://gaygeekgab.files.wordpress.com/2015/08/img_6792.jpg?w=396&zoom=2', 550);
-INSERT INTO Users (id, name, email, image_url, total_points) VALUES (4, 'Yoshi', 'stickytongue@yahoo.com', 'http://images5.fanpop.com/image/photos/30400000/Yoshi-snowboard-yoshi-30430714-455-480.png', 600);
-INSERT INTO Users (id, name, email, image_url, total_points) VALUES (5, 'Bowser', 'boomboompow@yahoo.com', 'https://vignette.wikia.nocookie.net/fantendo/images/d/d1/Character-bowser.png/revision/latest/scale-to-width-down/531?cb=20150321152800', 500);
-INSERT INTO Users (id, name, email, image_url, total_points) VALUES (6, 'Wario', 'yourfutureleader@yahoo.com', 'http://images4.fanpop.com/image/photos/23800000/Wario-wario-and-waluigi-23803078-300-294.jpg', 250);
+INSERT INTO Users (id, name, email, picture_url, total_points) VALUES (1, 'Mario', 'redoveralls@yahoo.com', 'https://media.nintendo.com/nintendo/bin/UOIekvv9YnMZx4CpweP-v4HDIzmqag9J/HpMzIWmEi7j1uKqpBXziLb6qOVKkgjco.jpg', 250);
+INSERT INTO Users (id, name, email, picture_url, total_points) VALUES (2, 'Luigi', 'greenoveralls@yahoo.com', 'https://static.giantbomb.com/uploads/scale_small/9/99864/2389814-nsmbuluigi.png', 450);
+INSERT INTO Users (id, name, email, picture_url, total_points) VALUES (3, 'Princess', 'pinkdress@yahoo.com', 'https://gaygeekgab.files.wordpress.com/2015/08/img_6792.jpg?w=396&zoom=2', 550);
+INSERT INTO Users (id, name, email, picture_url, total_points) VALUES (4, 'Yoshi', 'stickytongue@yahoo.com', 'http://images5.fanpop.com/image/photos/30400000/Yoshi-snowboard-yoshi-30430714-455-480.png', 600);
+INSERT INTO Users (id, name, email, picture_url, total_points) VALUES (5, 'Bowser', 'boomboompow@yahoo.com', 'https://vignette.wikia.nocookie.net/fantendo/images/d/d1/Character-bowser.png/revision/latest/scale-to-width-down/531?cb=20150321152800', 500);
+INSERT INTO Users (id, name, email, picture_url, total_points) VALUES (6, 'Wario', 'yourfutureleader@yahoo.com', 'http://images4.fanpop.com/image/photos/23800000/Wario-wario-and-waluigi-23803078-300-294.jpg', 250);
 
 INSERT INTO Users_Achievements (id, user_id, achievement_id, date) VALUES (1, 1, 1, '2017-08-02');
 INSERT INTO Users_Achievements (id, user_id, achievement_id, date) VALUES (2, 2, 1, '2017-08-03');
