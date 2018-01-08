@@ -6,7 +6,7 @@ body {
 .navbar {
   height: 55px;
   width: 100%;
-  background: #dee2e8;
+/*  background: #dee2e8;*/
   background: gray;
 }
 
@@ -108,6 +108,89 @@ body {
 .score {
   color: red;
 }
+
+/* --------------------------------- */
+/* ------- Splash page ------------- */
+/* --------------------------------- */
+
+.splash-top-bar {
+  background: #fff;
+  width: 100%;
+  height: 60px;
+  position: relative;
+}
+
+.splash-top-bar ul {
+  list-style-type: none;
+  padding: 0;
+  width: 240px;
+  height: 60px;
+  float: right;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.splash-top-bar li {
+  display: inline-block;
+  padding: 18px 20px;
+  cursor: pointer;
+}
+
+.splash-top-bar li:hover {
+  background: #f2f3f4;
+  border-bottom: 2px solid red;
+}
+
+.splash-top-bar-title {
+  color: black;
+  font-size: 30px;
+  font-weight: bold;
+  width: 240px;
+  height: 60px;
+  position: absolute;
+  left: 200px;
+  top: 0;
+  line-height: 60px;
+}
+
+.splash-banner {
+  width: 100%;
+  position: relative;
+}
+
+.splash-banner img {
+  width: 100%;
+  height: 600px;
+}
+
+.splash-banner div {
+  position: absolute;
+  left: 180px;
+  bottom: 0;
+  color: white;
+  font-family: Helvetica, Arial, sans-serif;
+  height: 250px;
+}
+
+.splash-banner h1 {
+  font-size: 50px;
+}
+
+.splash-banner h2 {
+  font-size: 25px;
+  margin-bottom: 25px;
+}
+
+.splash-banner div a {
+  background: #db4c3f;
+  padding: 10px 20px;
+  margin: auto;
+}
+
+/* --------------------------------- */
+/* ---- end of Splash page --------- */
+/* --------------------------------- */
 
 .challengescontainer {
   margin: auto;
