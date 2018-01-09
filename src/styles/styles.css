@@ -456,6 +456,39 @@ a, a:visited, a:hover, a:active {
   transform: perspective(600px) rotateY(0deg);
 }
 
+.challenges-footer {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  margin-left: -315px;
+}
+
+.challenges-footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.challenges-footer li {
+  font-size: 26px;
+  padding: 20px 0;
+  width: 200px;
+  text-align: center;
+  border: 2px solid gray;
+  margin: 0 5px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.challenges-footer li:hover {
+  border: 2px solid black;
+  cursor: pointer;
+  color: red;
+}
+
 @media only screen and (max-width:1200px) {
   .back {
     width: 24.9%;
