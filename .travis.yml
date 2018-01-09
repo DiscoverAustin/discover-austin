@@ -1,5 +1,7 @@
 language: node_js
-node_js:
-  "node"
+node_js: node
 script:
-  - npm run lint
+- npm run lint
+env:
+  global:
+    secure: e8IhxYRmJuhZIafSx6OhvJDMqeg+MH1zTzvHChoeg8B3SEU5tT2rRXicCewBK+TNUsTGomnzAotlL5OmRHVQ6G0i+DQJk9lDTUlMPsM3WcrVZ4rnmwAY/1HTpK8ILmW9elwUJvOz2FfmDu4+IpnIih4x1oDj2tnyYRQr2iYcvMXtQ/rTRLLtj8HVFfMrOawnHKORlNrcPRWVzQuzcm86Z8GDboFkLOfbZGkpR5Y7i7fyria/M1IDqheizqZyW8c/ujOJ2mP8QFlNQUuBPEFx6AslwslPVfHbjFAi8JYW+4oi3nT10fr9O153NojX6tLDc8pJQppDlGkCLOn4By8I5bG4sOTUUyVkf4iGY3L4+7QDvYovLsSCQ86a6I5/IxhXcK786g44GP2uG3rqtzUbqxQaBkwu8UnqfeLYfQ/02XUD2KM9v2oN2RVN4ZucqiWwtrThcwpiuEIl1G5M1jsHoiT3iN+4ETteZtP99kezoeHIPv4aL1PN28JW527a/BkeSewTv1LVO9f44o4gPT8Oy0YjirUPZZKYcBG+Hri6O/8akMUrn2S8HShkb7AdSBGYAog9wmR8cdUtvdIqU54O+nqWbXQwtfJP1UlFcgItvEBbaqdUqz1hwEB7/Ft5ayX6Y0dmqG18WTAMKM91tQ8iJjN3+qI6xSh7WFEDh+7GxBc=
