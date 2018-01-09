@@ -46,6 +46,21 @@ app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
 
+passport.serializeUser(function(user, done) {
+  console.log('user: ', user);
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  db.getUserInfo(id)
+  .then((user) => {
+    done(null, user)
+  })
+  .catch((e) => {
+    console.error('Error deserializing user!: ', e);
+  })
+});
+
 passport.use(new FacebookStrategy({
   clientID: '158163551574274',
   clientSecret: CLIENT_SECRET,

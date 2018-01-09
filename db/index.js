@@ -54,10 +54,8 @@ const findOrCreateUser = userInfo => (
       console.log('result from findOrCreateUser!: ', userArray);
       if (userArray.length) {
         return JSON.parse(JSON.stringify(userArray[0]));
-      } else {
-        return createUser(userInfo);
       }
-
+      return createUser(userInfo);
     })
     .then((res) => {
       console.log('res from getUserByFacebookId: ', res);
