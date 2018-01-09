@@ -31,20 +31,17 @@ const port = process.env.PORT || 3000;
 const APP_DOMAIN = process.env.DOMAIN || `http://localhost:${port}`;
 
 const sessionOptions = {
-  saveUninitialized: true,
-  resave: true,
+  saveUninitialized: false,
+  resave: false,
   // store: sessionStore,
   secret: 'Was zum Teufel!',
-  cookie: {
-    httpOnly: true,
-    maxAge: 2419200000,
-  },
 };
 
 app.use(express.static(DIST_DIR));
 app.use(morgan('dev'));
-app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -92,6 +89,12 @@ passport.use(new FacebookStrategy({
 }));
 
 /* --------- GET Handlers ---------- */
+
+app.get('*', (req, res, next) => {
+  console.log('req.user: ', req.user);
+  console.log('req.session: ', req.session);
+  next();
+});
 
 app.get('/src/styles/styles.css', (req, res) => {
   res.sendFile(path.join(CLIENT_DIR, 'styles/styles.css'));
