@@ -50,14 +50,25 @@ passport.use(new FacebookStrategy({
   clientID: '158163551574274',
   clientSecret: CLIENT_SECRET,
   callbackURL: `${APP_DOMAIN}/auth/facebook/callback`,
-  profileFields: ['first_name', 'last_name'],
+  profileFields: ['first_name', 'last_name', 'email', 'picture.type(large)'],
   enableProof: true,
 }, (accessToken, refreshToken, profile, done) => {
   console.log('new profile!: ', profile);
-  done(null, 'true');
+  const facebookId = profile.id;
+  const { familyName: lastName, givenName: firstName } = profile.name;
+  const email = profile.emails[0].value;
+  const pictureUrl = profile.photos[0].value;
+  const userInfo = { firstName, lastName, email, facebookId, pictureUrl };
+  db.findOrCreateUser(userInfo)
+    .then(result => {
+      done(null, userInfo);
+    });
+  // done(null, 'true');
 }));
 
+// firstName, lastName, facebookId,
 /* --------- GET Handlers ---------- */
+
 
 app.get('/src/styles/styles.css', (req, res) => {
   res.sendFile(path.join(CLIENT_DIR, 'styles/styles.css'));
