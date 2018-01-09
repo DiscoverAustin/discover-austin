@@ -54,7 +54,7 @@ export default class Splash extends React.Component {
       <div>
         <h1>Experience everything Austin has to offer</h1>
         <h2>From famous sites to the best kept secrets in town</h2>
-        <h2>20+ challenges to complete</h2>
+        <h2>25+ challenges to complete</h2>
         <div className="splash-icons-container">
           <img src="http://icons.iconarchive.com/icons/icons-land/points-of-interest/256/Restaurant-Blue-icon.png" />
           <img src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-5/1024/MacFamilyTree-icon.png" />
