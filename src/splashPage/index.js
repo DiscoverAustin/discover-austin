@@ -5,8 +5,25 @@ export default class Splash extends React.Component {
     super();
     this.state = {
       showMenu: false,
+      quotes: [
+        { name: 'Larry Page', text: 'I\'ve never had this much fun in my life!' },
+        { name: 'Bill Gates', text: 'I never knew Austin had this much to offer' },
+        { name: 'Elon Musk', text: 'Discover Austin motivates me to try new things' },
+      ],
     };
     this.toggleMenu = this.toggleMenu.bind(this);
+    this.nextQuote = this.nextQuote.bind(this);
+  }
+
+  componentDidMount() {
+    setInterval(this.nextQuote, 5000);
+  }
+
+  nextQuote() {
+    const quotes = this.state.quotes.slice();
+    const a = quotes.shift();
+    quotes.push(a);
+    this.setState({ quotes });
   }
 
   toggleMenu() {
@@ -76,6 +93,13 @@ export default class Splash extends React.Component {
         </div>
       </div>
       <img src="http://bigreddog.com/wp-content/uploads/2016/03/12_AustinSkylineSunset-1.jpg" />
+    </section>
+    <section className="splash-quotes">
+      <div>
+        <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/19279-200.png" />
+        <h3>"{ this.state.quotes[0].text }"</h3>
+        <p>- { this.state.quotes[0].name }</p>
+      </div>
     </section>
   </div>
   )

@@ -249,9 +249,6 @@ body {
   display: inline-block;
   padding-top: 110px;
   width: 50%;
-  position: absolute;
-  left: 0;
-/*  padding-left: 20%;*/
 }
 
 .splash-instructions-wrapper div {
@@ -265,8 +262,24 @@ body {
 
 .splash-rules img {
   width: 50%;
-  position: absolute;
-  right: 0;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
+}
+
+.splash-quotes {
+  padding: 80px 0 100px 0;
+}
+
+.splash-quotes div {
+  width: 100%;
+  text-align: center;
+}
+
+.splash-quotes img {
+  display: block;
+  margin: auto;
 }
 
 @media only screen and (max-width:1280px) {
@@ -309,6 +322,10 @@ body {
     position: static;
     width: 100%;
   }
+
+  .splash-quotes {
+    padding: 40px 0 80px 0;
+  }
 }
 
 @media only screen and (max-width:480px) {
@@ -329,13 +346,7 @@ body {
     height: 400px;
   }
 
- /* .splash-banner div {
-    width: 100%;
-    left: 70px;
-    bottom: 50px;
-  }*/
-
-   .splash-banner div {
+  .splash-banner div {
     bottom: 180px;
     left: 20%;
     bottom: 50px;
@@ -350,26 +361,9 @@ body {
     height: 50px;
   }
 
-/*  .splash-instructions-wrapper {
-    position: static;
-    width: 100%;
-    padding: 80px 0;
+  .splash-quotes {
+    padding: 20px 0 80px 0;
   }
-
-  .splash-instructions-wrapper div {
-    width: 90%;
-    margin: auto;
-    padding: 0;
-  }
-
-  .splash-instructions-wrapper h1 {
-    text-align: center;
-  }
-
-  .splash-rules img {
-    position: static;
-    width: 100%;
-  }*/
 }
 
 /* --------------------------------- */
