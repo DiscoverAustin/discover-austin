@@ -6,6 +6,7 @@ export default class Challenges extends React.Component {
     super();
     this.state = {
       showMenu: false,
+      query: 'all',
       challenges: [
         {
           name: 'Hack Reactor',
@@ -176,6 +177,73 @@ export default class Challenges extends React.Component {
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 
+  handleClick(query) {
+    this.setState({
+      query,
+    });
+  }
+
+  filterChallenges(challenge, index) {
+    if (this.state.query === 'completed') {
+      if (this.state.user.achievements.includes(challenge.name)) {
+        return (
+          <div className="challengebox" key={index} >
+            <div className="back">
+              <a href={challenge.yelp} target="_blank">
+                <h3>{challenge.name}</h3>
+                <h2>{challenge.points}</h2>
+              </a>
+            </div>
+            <div className="front">
+              <img src={challenge.image} />
+            </div>
+          </div>
+        );
+      }
+      return null;
+    } else if (this.state.query === 'todo') {
+      if (!this.state.user.achievements.includes(challenge.name)) {
+        return (
+          <div className="challengebox" key={index} >
+            <div className="back">
+              <a href={challenge.yelp} target="_blank">
+                <h3>{challenge.name}</h3>
+                <h2>{challenge.points}</h2>
+              </a>
+            </div>
+            <div className="front">
+              <img src={challenge.image} />
+            </div>
+          </div>
+        );
+      }
+      return null;
+    }
+    if (!this.state.user.achievements.includes(challenge.name)) {
+      return (
+        <div className="challengebox" key={index} >
+          <div className="back">
+            <a href={challenge.yelp} target="_blank">
+              <h3>{challenge.name}</h3>
+              <h2>{challenge.points}</h2>
+            </a>
+          </div>
+          <div className="front">
+            <img src={challenge.image} />
+          </div>
+        </div>
+      );
+    }
+    return (
+      <div className="challengebox challenge-completed" key={index} >
+        <a href={challenge.yelp} target="_blank">
+          <h3>{challenge.name}</h3>
+          <h2>{challenge.points}</h2>
+        </a>
+      </div>
+    );
+  }
+
   toggleMenu() {
     this.setState({
       showMenu: !this.state.showMenu,
@@ -188,19 +256,14 @@ export default class Challenges extends React.Component {
       <h1 className="pagetitle">Challenges</h1>
       <div className="challengescontainer">
         {this.state.challenges.map((challenge, index) => (
-          this.state.user.achievements.includes(challenge.name) ?
-        <div className="challengebox challenge-completed" key={index} ><a href={challenge.yelp} target="_blank"><h3>{challenge.name}</h3><h2>{challenge.points}</h2></a></div>
-        : <div className="challengebox" key={index} >
-        <div className="back"><a href={challenge.yelp} target="_blank"><h3>{challenge.name}</h3><h2>{challenge.points}</h2></a></div>
-        <div className="front"><img src={challenge.image} /></div>
-        </div>
-        ))}
+          this.filterChallenges(challenge, index)
+          ))}
       </div>
       <footer className="challenges-footer">
         <ul>
-          <li>Completed</li>
-          <li>Todo</li>
-          <li>All</li>
+          <li onClick={() => this.handleClick('completed')}>Completed</li>
+          <li onClick={() => this.handleClick('todo')}>Todo</li>
+          <li onClick={() => this.handleClick('all')}>All</li>
         </ul>
       </footer>
     </div>
