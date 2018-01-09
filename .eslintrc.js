@@ -26,7 +26,7 @@ module.exports = {
     "no-console": "off",
     "react/prefer-stateless-function": [2, { "ignorePureComponents": true }],
     "object-curly-newline": ["error", {
-      "ObjectExpression": { "minProperties": 4},
+      "ObjectExpression": { "minProperties": 2},
       "ObjectPattern": "never"
     }]
   },

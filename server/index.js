@@ -46,19 +46,19 @@ app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser((user, done) => {
   console.log('user: ', user);
   done(null, user);
 });
 
-passport.deserializeUser(function(user, done) {
-  db.getUserInfo(id)
-  .then((user) => {
-    done(null, user)
-  })
-  .catch((e) => {
-    console.error('Error deserializing user!: ', e);
-  })
+passport.deserializeUser((user, done) => {
+  db.getUserInfo(user)
+    .then((res) => {
+      done(null, res);
+    })
+    .catch((e) => {
+      console.error('Error deserializing user!: ', e);
+    });
 });
 
 passport.use(new FacebookStrategy({
@@ -73,10 +73,16 @@ passport.use(new FacebookStrategy({
   const { familyName: lastName, givenName: firstName } = profile.name;
   const email = profile.emails[0].value;
   const pictureUrl = profile.photos[0].value;
-  const userInfo = { firstName, lastName, email, facebookId, pictureUrl };
+  const userInfo = {
+    firstName,
+    lastName,
+    email,
+    facebookId,
+    pictureUrl,
+  };
   db.findOrCreateUser(userInfo)
-    .then(result => {
-      done(null, userInfo);
+    .then((result) => {
+      done(null, result);
     });
   // done(null, 'true');
 }));
