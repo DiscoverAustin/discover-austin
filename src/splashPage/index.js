@@ -50,6 +50,33 @@ export default class Splash extends React.Component {
         <a href="/login">GET STARTED - IT'S FREE</a>
       </div>
     </section>
+    <section className="splash-intro">
+      <div>
+        <h1>Experience everything Austin has to offer</h1>
+        <h2>From famous sites to the best kept secrets in town</h2>
+        <h2>20+ challenges to complete</h2>
+        <div className="splash-icons-container">
+          <img src="http://icons.iconarchive.com/icons/icons-land/points-of-interest/256/Restaurant-Blue-icon.png" />
+          <img src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-5/1024/MacFamilyTree-icon.png" />
+          <img src="https://cdn2.iconfinder.com/data/icons/ios7-inspired-mac-icon-set/512/itunes_512.png" />
+          <img src="http://www.pvhc.net/img17/pixkriyummsylqerejfp.png" />
+          <div className="ut-wrapper"><img src="https://cdn.bleacherreport.net/images/team_logos/328x328/texas_longhorns.png" /></div>
+          <img src="http://icons.iconarchive.com/icons/flat-icons.com/flat/512/Beer-icon.png" />
+        </div>
+      </div>
+    </section>
+    <section className="splash-rules">
+      <div className="splash-instructions-wrapper">
+        <div>
+          <h1>How does it work?</h1>
+          <h3> - Visit a location to earn a challenge badge</h3>
+          <h3> - Earning a challenge badge gives you points</h3>
+          <h3> - Climb the leaderboard</h3>
+          <h3> - Conquer Austin</h3>
+        </div>
+      </div>
+      <img src="http://bigreddog.com/wp-content/uploads/2016/03/12_AustinSkylineSunset-1.jpg" />
+    </section>
   </div>
   )
 }

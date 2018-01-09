@@ -80,9 +80,6 @@ app.get('/hahah', (req, res) => {
   res.send('bahahaha').end('hahaha');
 });
 
-app.get('/login', (req, res) => {
-  res.send('lol wrong').end('lolol wrong');
-});
 
 /* --------- API Routes ---------- */
 
