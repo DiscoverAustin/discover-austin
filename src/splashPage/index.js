@@ -3,16 +3,12 @@ import React from 'react';
 export default class Splash extends React.Component {
   constructor() {
     super();
-    this.state = {
-      showMenu: false,
-    };
+    this.state = { showMenu: false };
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   toggleMenu() {
-    this.setState({
-      showMenu: !this.state.showMenu,
-    });
+    this.setState({ showMenu: !this.state.showMenu });
   }
 
   render = () => (
@@ -53,4 +49,3 @@ export default class Splash extends React.Component {
   </div>
   )
 }
-

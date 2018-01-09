@@ -35,7 +35,10 @@ const sessionOptions = {
   resave: true,
   // store: sessionStore,
   secret: 'Was zum Teufel!',
-  cookie: { httpOnly: true, maxAge: 2419200000 },
+  cookie: {
+    httpOnly: true,
+    maxAge: 2419200000,
+  },
 };
 
 app.use(express.static(DIST_DIR));
@@ -47,14 +50,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser((user, done) => {
-  console.log('user: ', user);
-  done(null, user);
+  console.log('user from serialization: ', user);
+  done(null, user.facebook_id);
 });
 
-passport.deserializeUser((user, done) => {
-  db.getUserInfo(user)
-    .then((res) => {
-      done(null, res);
+passport.deserializeUser((facebookId, done) => {
+  console.log('user from deserialization: ', facebookId);
+  db.getUserByFacebookId(facebookId)
+    .then((foundUser) => {
+      console.log('res deserialization: ', foundUser);
+      done(null, foundUser);
     })
     .catch((e) => {
       console.error('Error deserializing user!: ', e);
@@ -84,12 +89,9 @@ passport.use(new FacebookStrategy({
     .then((result) => {
       done(null, result);
     });
-  // done(null, 'true');
 }));
 
-// firstName, lastName, facebookId,
 /* --------- GET Handlers ---------- */
-
 
 app.get('/src/styles/styles.css', (req, res) => {
   res.sendFile(path.join(CLIENT_DIR, 'styles/styles.css'));
@@ -99,14 +101,18 @@ app.get('/src/styles/leaflet.css', (req, res) => {
   res.sendFile(path.join(CLIENT_DIR, 'styles/leaflet.css'));
 });
 
-app.get('/auth/facebook', passport.authenticate('facebook', {
-  authType: 'rerequest',
-  scope: ['email', 'public_profile'],
-}));
+app.get('/auth/facebook', passport.authenticate(
+  'facebook',
+  {
+    authType: 'rerequest',
+    scope: ['email', 'public_profile'],
+  },
+));
 
-app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-  failureRedirect: '/login',
-}), (req, res) => { res.redirect('/'); });
+app.get('/auth/facebook/callback', passport.authenticate(
+  'facebook',
+  { failureRedirect: '/login' },
+), (req, res) => { res.redirect('/'); });
 
 app.get('/hahah', (req, res) => {
   res.send('bahahaha').end('hahaha');
@@ -167,7 +173,7 @@ app.get('/api/getAllUsers', (req, res) => {
 /* --------- POST Handlers ---------- */
 
 
-// Default route fallback (allows React Router to handle routing)
+// Default route fallback (allows React Router to handle all other routing)
 app.get('*', (req, res) => {
   res.sendFile(path.join(DIST_DIR, 'index.html'));
 });

@@ -17,17 +17,13 @@ export default class Leaderboard extends React.Component {
   componentWillMount = () => {
     axios.get('http://localhost:3000/api/leaderboard')
       .then((res) => {
-        this.setState({
-          leaders: res.data,
-        });
+        this.setState({ leaders: res.data });
       })
       .catch(e => console.log(e));
   }
 
   toggleMenu() {
-    this.setState({
-      showMenu: !this.state.showMenu,
-    });
+    this.setState({ showMenu: !this.state.showMenu });
   }
 
   render = () => (
@@ -40,4 +36,3 @@ export default class Leaderboard extends React.Component {
     </div>
   )
 }
-

@@ -39,15 +39,17 @@ export default class Challenges extends React.Component {
           image: 'https://media1.s-nbcnews.com/j/newscms/2017_29/2076501/170715-chipotle-restaurant-ew-1227p_5fa0d17495b09c2189e8632005bc9e95.nbcnews-ux-2880-1000.jpg',
         },
       ],
-      user: { name: 'Edward', points: 850, achievements: ['State Capitol', 'Hack Reactor', 'The Driskell'] },
+      user: {
+        name: 'Edward',
+        points: 850,
+        achievements: ['State Capitol', 'Hack Reactor', 'The Driskell'],
+      },
     };
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   toggleMenu() {
-    this.setState({
-      showMenu: !this.state.showMenu,
-    });
+    this.setState({ showMenu: !this.state.showMenu });
   }
 
   render = () => (
