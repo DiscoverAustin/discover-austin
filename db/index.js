@@ -27,9 +27,16 @@ const getUserInfo = id => (
     })
 );
 
+
 const getUserByFacebookId = facebookId => (
   connection
     .then(db => db.query(`SELECT * FROM users WHERE facebook_id = ${facebookId}`))
+);
+
+const getUserAchievements = id => (
+  connection
+    .then(db => db.query(`SELECT * FROM achievements a, users_achievements ua, users u
+                          WHERE u.id = ${id} AND a.id = ua.achievement_id AND u.id = ua.user_id`))
     .catch((e) => {
       console.error('Error retreiving from database!: ', e);
       throw (e);
@@ -58,7 +65,50 @@ const findOrCreateUser = userInfo => (
     })
     .catch((e) => {
       console.error('Error findingOrCreatingUser!: ', e);
+    })
+);
+
+const getLeaderboard = () => (
+  connection
+    .then(db => db.query('SELECT name, total_points FROM users ORDER BY total_points DESC LIMIT 10'))
+    .catch((e) => {
+      console.error('Error retreiving from database!: ', e);
       throw (e);
+    })
+);
+
+const updateUserTotalPoints = newPointTotal => (
+  connection
+    .then(db => db.query(`UPDATE users SET total_points = ${newPointTotal}`))
+    .catch((e) => {
+      console.error('Error retreiving from database!: ', e);
+      throw (e);
+    })
+);
+
+// need to also update current point total when adding an achievement
+const addCompletedAchievement = (userId, achievementId) => (
+  connection
+    .then(db => db.query(`INSERT INTO Users_Achievements (user_id, achievement_id, date) VALUES (${userId}, ${achievementId}, now())`))
+    .catch((e) => {
+      console.error('Error retreiving from database!: ', e);
+    })
+);
+
+
+const getFeed = () => (
+  connection
+    .then(db => db.query('SELECT * FROM achievements a, users_achievements ua, users u WHERE a.id = ua.achievement_id AND u.id = ua.user_id ORDER BY date DESC LIMIT 20'))
+    .catch((e) => {
+      console.error('Error retreiving from database!: ', e);
+    })
+);
+
+const getAllAchievements = () => (
+  connection
+    .then(db => db.query('SELECT * from achievements'))
+    .catch((e) => {
+      console.error('Error retreiving from database!: ', e);
     })
 );
 
@@ -69,4 +119,10 @@ module.exports = {
   getUserByFacebookId,
   createUser,
   findOrCreateUser,
+  getLeaderboard,
+  addCompletedAchievement,
+  getUserAchievements,
+  updateUserTotalPoints,
+  getAllAchievements,
+  getFeed,
 };

@@ -8,7 +8,6 @@ body {
 .navbar {
   height: 55px;
   width: 100%;
-/*  background: #dee2e8;*/
   background: #fff;
 }
 
@@ -115,6 +114,11 @@ body {
 /* ------- Splash page ------------- */
 /* --------------------------------- */
 
+.splash-main-container {
+  background: #fff;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
 .navbar-wrapper {
   display: none;
 }
@@ -196,43 +200,223 @@ body {
   margin: auto;
 }
 
-@media only screen and (max-width:765px) {
-  .splash-top-bar-title {
-    left: 100px;
-  }
+.splash-intro {
+  font-family: Helvetica, Arial, sans-serif;
+  padding: 100px 0;
+}
 
-  .splash-banner div {
-    bottom: 180px;
-    left: 250px;
+.splash-intro h1 {
+  text-align: center;
+  font-size: 26px;
+  color: #666;
+}
+
+.splash-intro h2 {
+  font-size: 18px;
+  color: #828282;
+}
+
+.splash-icons-container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+
+.splash-icons-container img {
+  width: 100px;
+  height: 100px;
+}
+
+.ut-wrapper {
+  background: #bf5700;
+  border-radius: 100%;
+}
+
+.splash-rules {
+  background: #f4f4f4;
+}
+
+.splash-rules h1 {
+  font-size: 26px;
+  color: #666;
+}
+
+.splash-rules h3 {
+  font-size: 18px;
+  color: #828282;
+}
+
+.splash-instructions-wrapper {
+  display: inline-block;
+  padding-top: 110px;
+  width: 50%;
+}
+
+.splash-instructions-wrapper div {
+  width: 370px;
+  margin: auto;
+}
+
+.splash-instructions-wrapper h1 {
+  text-align: center;
+}
+
+.splash-rules img {
+  width: 50%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
+}
+
+.splash-quotes {
+  padding: 80px 0 100px 0;
+}
+
+.splash-quotes div {
+  width: 100%;
+  text-align: center;
+}
+
+.splash-quotes img {
+  display: block;
+  margin: auto;
+}
+
+.splash-team {
+  background: #f4f4f4;
+  padding: 50px 0;
+}
+
+.splash-team h1 {
+  text-align: center;
+}
+
+.splash-team-people {
+  padding: 50px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.splash-team-person {
+  padding-bottom: 40px;
+}
+
+.splash-team-person div {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  border-radius: 50%;
+}
+
+.splash-team-person img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.splash-team-person h5 {
+  text-align: center;
+  font-size: 24px;
+}
+
+@media only screen and (max-width:1280px) {
+  .splash-instructions-wrapper {
+    padding-top: 30px;
+  }
+}
+
+@media only screen and (max-width:1150px) {
+  .splash-top-bar-title {
+    left: 150px;
   }
 
   .splash-banner img {
     opacity: 0.5;
   }
+
+  .splash-banner div {
+    bottom: 180px;
+    left: 50%;
+    margin-left: -133px;
+  }
 }
 
-@media only screen and (max-width:480px) {
-  .navbar-wrapper {
-    display: inline;
+@media only screen and (max-width:765px) {
+  .splash-top-bar-title {
+    left: 100px;
+  }
+
+  .splash-instructions-wrapper {
+    position: static;
+    width: 100%;
+    padding: 80px 0;
+  }
+
+  .splash-instructions-wrapper div {
+    width: 90%;
+    margin: auto;
+    padding: 0;
+  }
+
+  .splash-instructions-wrapper h1 {
+    text-align: center;
+  }
+
+  .splash-rules img {
+    position: static;
+    width: 100%;
+  }
+
+  .splash-quotes {
+    padding: 40px 0 80px 0;
+  }
+}
+
+@media only screen and (max-width:650px) {
+  .splash-top-bar ul {
+    display: none;
   }
 
   .splash-top-bar-title {
     display: none;
   }
 
-  .splash-top-bar ul {
-    display: none;
+  .navbar-wrapper {
+    display: inline;
   }
+}
 
+@media only screen and (max-width:480px) {
   .splash-banner img {
     opacity: 0.5;
     height: 400px;
   }
 
   .splash-banner div {
-    width: 100%;
-    left: 70px;
     bottom: 50px;
+  }
+
+  .splash-icons-container {
+    flex-wrap: wrap;
+  }
+
+  .splash-icons-container img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .splash-quotes {
+    padding: 20px 0 80px 0;
+  }
+}
+
+@media only screen and (max-width:420px) {
+  .splash-team-people {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
 
@@ -326,6 +510,40 @@ a, a:visited, a:hover, a:active {
   transform: perspective(600px) rotateY(0deg);
 }
 
+.challenges-footer {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  margin-left: -315px;
+}
+
+.challenges-footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.challenges-footer li {
+  font-size: 26px;
+  padding: 20px 0;
+  width: 200px;
+  text-align: center;
+  border: 2px solid gray;
+  margin: 0 5px;
+  background: navy;
+  color: #f4f4f4;
+  border-radius: 8px;
+}
+
+.challenges-footer li:hover {
+  border: 2px solid black;
+  cursor: pointer;
+  color: red;
+}
+
 @media only screen and (max-width:1200px) {
   .back {
     width: 24.9%;
@@ -339,6 +557,10 @@ a, a:visited, a:hover, a:active {
 }
 
 @media only screen and (max-width:850px) {
+  .challengebox h3 {
+    font-size: 20px;
+  }
+
   .back {
     width: 24.5%;
   }
@@ -347,6 +569,21 @@ a, a:visited, a:hover, a:active {
 @media only screen and (max-width:700px) {
   .back {
     width: 24.5%;
+  }
+}
+
+@media only screen and (max-width:650px) {
+  .challenges-footer {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    margin-left: -165px;
+  }
+
+  .challenges-footer li {
+    font-size: 18px;
+    width: 100px;
+    padding: 30px 0;
   }
 }
 

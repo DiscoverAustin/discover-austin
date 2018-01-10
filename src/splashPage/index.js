@@ -3,8 +3,36 @@ import React from 'react';
 export default class Splash extends React.Component {
   constructor() {
     super();
-    this.state = { showMenu: false };
+    this.state = {
+      showMenu: false,
+      quotes: [
+        {
+          name: 'Larry Page',
+          text: 'I\'ve never had this much fun in my life!',
+        },
+        {
+          name: 'Bill Gates',
+          text: 'I never knew Austin had this much to offer',
+        },
+        {
+          name: 'Elon Musk',
+          text: 'Discover Austin motivates me to try new things',
+        },
+      ],
+    };
     this.toggleMenu = this.toggleMenu.bind(this);
+    this.nextQuote = this.nextQuote.bind(this);
+  }
+
+  componentDidMount() {
+    setInterval(this.nextQuote, 5000);
+  }
+
+  nextQuote() {
+    const quotes = this.state.quotes.slice();
+    const a = quotes.shift();
+    quotes.push(a);
+    this.setState({ quotes });
   }
 
   toggleMenu() {
@@ -44,6 +72,61 @@ export default class Splash extends React.Component {
         <h1>Hello Austin</h1>
         <h2>Get ready for adventure</h2>
         <a href="/auth/facebook">GET STARTED - IT'S FREE</a>
+      </div>
+    </section>
+    <section className="splash-intro">
+      <div>
+        <h1>Experience everything Austin has to offer</h1>
+        <h2>From famous sites to the best kept secrets in town</h2>
+        <h2>25+ challenges to complete</h2>
+        <div className="splash-icons-container">
+          <img src="http://icons.iconarchive.com/icons/icons-land/points-of-interest/256/Restaurant-Blue-icon.png" />
+          <img src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-5/1024/MacFamilyTree-icon.png" />
+          <img src="https://cdn2.iconfinder.com/data/icons/ios7-inspired-mac-icon-set/512/itunes_512.png" />
+          <img src="http://www.pvhc.net/img17/pixkriyummsylqerejfp.png" />
+          <div className="ut-wrapper"><img src="https://cdn.bleacherreport.net/images/team_logos/328x328/texas_longhorns.png" /></div>
+          <img src="http://icons.iconarchive.com/icons/flat-icons.com/flat/512/Beer-icon.png" />
+        </div>
+      </div>
+    </section>
+    <section className="splash-rules">
+      <div className="splash-instructions-wrapper">
+        <div>
+          <h1>How does it work?</h1>
+          <h3> - Visit a location to earn a challenge badge</h3>
+          <h3> - Earning a challenge badge gives you points</h3>
+          <h3> - Climb the leaderboard</h3>
+          <h3> - Conquer Austin</h3>
+        </div>
+      </div>
+      <img src="http://bigreddog.com/wp-content/uploads/2016/03/12_AustinSkylineSunset-1.jpg" />
+    </section>
+    <section className="splash-quotes">
+      <div>
+        <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/19279-200.png" />
+        <h3>"{ this.state.quotes[0].text }"</h3>
+        <p>- { this.state.quotes[0].name }</p>
+      </div>
+    </section>
+    <section className="splash-team">
+      <h1>Meet the team</h1>
+      <div className="splash-team-people">
+      <div className="splash-team-person">
+        <div><img src="https://avatars0.githubusercontent.com/u/5833874?s=400&v=4" /></div>
+        <h5>Nathan Chackerian</h5>
+      </div>
+      <div className="splash-team-person">
+        <div><img src="https://avatars2.githubusercontent.com/u/15621096?s=400&v=4" /></div>
+        <h5>Kendrick Gardner</h5>
+      </div>
+      <div className="splash-team-person">
+        <div><img src="https://avatars3.githubusercontent.com/u/33075304?s=400&v=4" /></div>
+        <h5>Rick Gomez</h5>
+      </div>
+      <div className="splash-team-person">
+        <div><img src="https://avatars2.githubusercontent.com/u/29362180?s=400&v=4" /></div>
+        <h5>Edward White</h5>
+      </div>
       </div>
     </section>
   </div>
