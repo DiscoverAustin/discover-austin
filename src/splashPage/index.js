@@ -6,9 +6,18 @@ export default class Splash extends React.Component {
     this.state = {
       showMenu: false,
       quotes: [
-        { name: 'Larry Page', text: 'I\'ve never had this much fun in my life!' },
-        { name: 'Bill Gates', text: 'I never knew Austin had this much to offer' },
-        { name: 'Elon Musk', text: 'Discover Austin motivates me to try new things' },
+        {
+          name: 'Larry Page',
+          text: 'I\'ve never had this much fun in my life!',
+        },
+        {
+          name: 'Bill Gates',
+          text: 'I never knew Austin had this much to offer',
+        },
+        {
+          name: 'Elon Musk',
+          text: 'Discover Austin motivates me to try new things',
+        },
       ],
     };
     this.toggleMenu = this.toggleMenu.bind(this);
@@ -27,9 +36,7 @@ export default class Splash extends React.Component {
   }
 
   toggleMenu() {
-    this.setState({
-      showMenu: !this.state.showMenu,
-    });
+    this.setState({ showMenu: !this.state.showMenu });
   }
 
   render = () => (
@@ -55,8 +62,8 @@ export default class Splash extends React.Component {
 
       <div className="splash-top-bar-title">Discover Austin!</div>
       <ul>
-        <li>Log in</li>
-        <li>Sign up</li>
+        <a href="/auth/facebook"><li>Log in</li></a>
+        <a href="/auth/facebook"><li>Sign up</li></a>
       </ul>
     </section>
     <section className="splash-banner">
@@ -64,7 +71,7 @@ export default class Splash extends React.Component {
       <div>
         <h1>Hello Austin</h1>
         <h2>Get ready for adventure</h2>
-        <a href="/login">GET STARTED - IT'S FREE</a>
+        <a href="/auth/facebook">GET STARTED - IT'S FREE</a>
       </div>
     </section>
     <section className="splash-intro">
@@ -125,4 +132,3 @@ export default class Splash extends React.Component {
   </div>
   )
 }
-

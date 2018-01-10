@@ -12,9 +12,7 @@ export default class Leaderboard extends React.Component {
   }
 
   toggleMenu() {
-    this.setState({
-      showMenu: !this.state.showMenu,
-    });
+    this.setState({ showMenu: !this.state.showMenu });
   }
 
  render = () => (

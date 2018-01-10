@@ -172,15 +172,17 @@ export default class Challenges extends React.Component {
           location: [30.276070, 97.753242],
         },
       ],
-      user: { name: 'Edward', points: 850, achievements: ['State Capitol', 'Hack Reactor', 'The Driskell'] },
+      user: {
+        name: 'Edward',
+        points: 850,
+        achievements: ['State Capitol', 'Hack Reactor', 'The Driskell'],
+      },
     };
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   handleClick(query) {
-    this.setState({
-      query,
-    });
+    this.setState({ query });
   }
 
   filterChallenges(challenge, index) {
@@ -245,9 +247,7 @@ export default class Challenges extends React.Component {
   }
 
   toggleMenu() {
-    this.setState({
-      showMenu: !this.state.showMenu,
-    });
+    this.setState({ showMenu: !this.state.showMenu });
   }
 
   render = () => (
