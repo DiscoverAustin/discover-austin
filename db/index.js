@@ -6,7 +6,7 @@ const mysql2 = require('mysql');
 const connection = mysql.createConnection(mysqlConfig)
   .catch(e => console.error('Error connecting to mysql database!: ', e.stack));
 
-// Non-promisified mysql connection solely for session storage
+// Non-promisified mysql connection. Used solely for session storage
 const connection2 = mysql2.createConnection(mysqlConfig);
 
 const getAllUsers = () => (
@@ -26,7 +26,6 @@ const getUserInfo = id => (
       throw (e);
     })
 );
-
 
 const getUserByFacebookId = facebookId => (
   connection
