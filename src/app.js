@@ -12,12 +12,12 @@ const App = () => (
   <div>
     <BrowserRouter>
       <Switch>
-        <Route path='/' component={ MainPage } exact={ true } ></Route>
-        <Route path='/leaderboard' component={ Leaderboard }></Route>
-        <Route path='/profile' component={ Profile }></Route>
-        <Route path='/challenges' component={ Challenges }></Route>
-        <Route path='/login' component={ Splash }></Route>
-        <Route component={ NotFoundPage }></Route>
+        <Route path='/' exact={ true } component={ MainPage } />
+        <Route path='/leaderboard' component={ Leaderboard } />
+        <Route path='/profile' component={ Profile } />
+        <Route path='/challenges' component={ Challenges } />
+        <Route path='/login' component={ Splash } />
+        <Route component={ NotFoundPage } />
       </Switch>
     </BrowserRouter>
   </div>

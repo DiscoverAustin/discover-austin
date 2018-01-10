@@ -19,6 +19,7 @@ const socket = require('./sockets');
 socket(io);
 
 const DIST_DIR = path.join(__dirname, '../dist');
+const BUNDLE = path.join(__dirname, '../dist/bundle');
 const CLIENT_DIR = path.join(__dirname, '../src/');
 
 const CLIENT_SECRET = global.CLIENT_SECRET ? global.CLIENT_SECRET : require('./secrets/secrets.js'); // eslint-disable-line
@@ -52,7 +53,8 @@ const sessionOptions = {
   name: 'discoverAustin',
 };
 
-app.use(express.static(DIST_DIR));
+app.use('/static', express.static(CLIENT_DIR));
+app.use(express.static(BUNDLE));
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -102,11 +104,22 @@ passport.use(new FacebookStrategy({
 }));
 
 /* --------- GET Handlers ---------- */
-app.get('*', (req, res, next) => {
-  console.log('req.user: ', req.user);
-  // console.log('req.user: ', JSON.parse(JSON.stringify(req.user)));
-  console.log('req.session: ', req.session);
-  next();
+
+// app.get('/login', (req, res) => {
+//   res.sendFile(path.join(DIST_DIR, 'index.html'));
+//   // res.end('no');
+// });
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(DIST_DIR, 'login.html'));
+// });
+
+app.get('/', (req, res) => {
+  if (!req.isAuthenticated()) {
+    res.sendFile(path.join(DIST_DIR, 'login.html'));
+  } else {
+    res.sendFile(path.join(DIST_DIR, 'index.html'));
+  }
 });
 
 app.get('/auth/facebook', passport.authenticate(
@@ -122,27 +135,15 @@ app.get('/auth/facebook/callback', passport.authenticate(
   { failureRedirect: '/login' },
 ), (req, res) => { res.redirect('/'); });
 
-
-app.get('/src/styles/styles.css', (req, res) => {
-  res.sendFile(path.join(CLIENT_DIR, 'styles/styles.css'));
+// Authentication Check for All Subsequent Routes
+app.get('*', (req, res, next) => {
+  if (!req.isAuthenticated()) {
+    res.redirect('/');
+  } else {
+    next();
+  }
 });
 
-app.get('/src/styles/leaflet.css', (req, res) => {
-  res.sendFile(path.join(CLIENT_DIR, 'styles/leaflet.css'));
-});
-
-
-// app.get('/login', (req, res) => {
-//   res.send('lol wrong').end('lolol wrong');
-// });
-//
-// app.get('*', (req, res) => {
-//   console.log('isAuthenticated: ', req.isAuthenticated());
-//   console.log('req.session: ', req.sesssion);
-//
-//   // next();
-//   res.sendFile(path.join(DIST_DIR, 'index.html'));
-// });
 /* --------- API Routes ---------- */
 
 app.get('/api/leaderboard', (req, res) => {
@@ -190,14 +191,21 @@ app.get('/api/getAllUsers', (req, res) => {
     .catch((e) => { console.error(e); });
 });
 
+app.get('/api/isLoggedIn', (req, res) => {
+  const isLoggedIn = req.isAuthenticated();
+  res.send({ isLoggedIn }).end();
+});
 
 /* --------- POST Handlers ---------- */
 
 
 // Default route fallback (allows React Router to handle all other routing)
 app.get('*', (req, res) => {
-  console.log('isAuthenticated: ', req.isAuthenticated());
-  res.sendFile(path.join(DIST_DIR, 'index.html'));
+  if (!req.isAuthenticated()) {
+    res.sendFile(path.join(DIST_DIR, 'login.html'));
+  } else {
+    res.sendFile(path.join(DIST_DIR, 'index.html'));
+  }
 });
 
 

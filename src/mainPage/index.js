@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import Nav from './Navbar';
 import MapPage from './Map';
 import Feed from './Feed';
@@ -33,11 +34,14 @@ export default class MainPage extends React.Component {
     this.setState({ showMenu: !this.state.showMenu });
   }
 
-  render = () => (
+  render = () => {
+    const allCookies = document.cookie;
+    console.log('allCookies: ', allCookies);
+    return (
     <div>
       <Nav showMenu={this.state.showMenu} toggleMenu={this.toggleMenu} />
       <MapPage />
       <Feed feed={this.state.feed} />
     </div>
   )
-}
+}}
