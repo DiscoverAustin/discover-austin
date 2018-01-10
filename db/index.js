@@ -56,6 +56,7 @@ const addNewUser = (name, email, facebookId, pictureUrl) => (
     })
 );
 
+
 const updateUserTotalPoints = newPointTotal => (
   connection
     .then(db => db.query(`UPDATE users SET total_points = ${newPointTotal}`))
@@ -73,6 +74,7 @@ const addCompletedAchievement = (userId, achievementId) => (
       console.error('Error retreiving from database!: ', e);
     })
 );
+
 
 const getFeed = () => (
   connection
