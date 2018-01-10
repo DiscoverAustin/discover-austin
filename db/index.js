@@ -56,9 +56,10 @@ const addNewUser = (name, email, facebookId, pictureUrl) => (
     })
 );
 
-const updateUserTotalPoints = points => (
+
+const updateUserTotalPoints = newPointTotal => (
   connection
-    .then(db => db.query(`UPDATE users SET total_points = ${points}`))
+    .then(db => db.query(`UPDATE users SET total_points = ${newPointTotal}`))
     .catch((e) => {
       console.error('Error retreiving from database!: ', e);
       throw (e);
@@ -74,6 +75,23 @@ const addCompletedAchievement = (userId, achievementId) => (
     })
 );
 
+
+const getFeed = () => (
+  connection
+    .then(db => db.query('SELECT * FROM achievements a, users_achievements ua, users u WHERE a.id = ua.achievement_id AND u.id = ua.user_id ORDER BY date DESC LIMIT 20'))
+    .catch((e) => {
+      console.error('Error retreiving from database!: ', e);
+    })
+);
+
+const getAllAchievements = () => (
+  connection
+    .then(db => db.query('SELECT * from achievements'))
+    .catch((e) => {
+      console.error('Error retreiving from database!: ', e);
+    })
+);
+
 module.exports = {
   getAllUsers,
   getUserInfo,
@@ -82,4 +100,6 @@ module.exports = {
   addNewUser,
   getUserAchievements,
   updateUserTotalPoints,
+  getAllAchievements,
+  getFeed,
 };
