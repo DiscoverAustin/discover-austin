@@ -29,8 +29,8 @@ const APP_DOMAIN = process.env.DOMAIN || 'http://localhost';
 const host = `${APP_DOMAIN}:${port}`;
 
 const sessionStoreOptions = {
-  checkExpirationInterval: 1000 * 60 * 15, // Every 15 minutes
-  expiration: 1000 * 60 * 60 * 24, // Every 24 hours
+  checkExpirationInterval: 1000 * 5, // Every 15 minutes
+  expiration: 1000 * 60 * 60 * 48, // Every 24 hours
   createDatabaseTable: true,
   schema: {
     tableName: 'Sessions',
@@ -48,9 +48,9 @@ const sessionOptions = {
   saveUninitialized: false,
   resave: false,
   secret: 'Was zum Teufel!',
-  maxAge: 1000 * 60 * 15,
   store: sessionStore,
   name: 'discoverAustin',
+  cookie: { maxAge: 1000 * 60 * 60 * 48 },
 };
 
 app.use('/static', express.static(CLIENT_DIR));
@@ -58,7 +58,6 @@ app.use(express.static(BUNDLE));
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -68,7 +67,6 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((facebookId, done) => {
-  console.log('deserialize!');
   db.getUserByFacebookId(facebookId)
     .then((foundUser) => {
       done(null, foundUser);
@@ -115,6 +113,9 @@ passport.use(new FacebookStrategy({
 // });
 
 app.get('/', (req, res) => {
+  console.log('cookies: ', req.cookies);
+  console.log('req.session: ', req.session);
+  console.log('is logged in on /?: ', req.isAuthenticated());
   if (!req.isAuthenticated()) {
     res.sendFile(path.join(DIST_DIR, 'login.html'));
   } else {
@@ -132,8 +133,11 @@ app.get('/auth/facebook', passport.authenticate(
 
 app.get('/auth/facebook/callback', passport.authenticate(
   'facebook',
-  { failureRedirect: '/login' },
-), (req, res) => { res.redirect('/'); });
+  {
+    failureRedirect: '/',
+    successRedirect: '/',
+  },
+));
 
 // Authentication Check for All Subsequent Routes
 app.get('*', (req, res, next) => {
@@ -194,6 +198,13 @@ app.get('/api/getAllUsers', (req, res) => {
 app.get('/api/isLoggedIn', (req, res) => {
   const isLoggedIn = req.isAuthenticated();
   res.send({ isLoggedIn }).end();
+});
+
+app.post('/api/logout', (req, res) => {
+  req.session.cookie.maxAge = 0;
+  req.logout();
+  res.clearCookie('discoverAustin');
+  res.sendFile(path.join(DIST_DIR, 'login.html'));
 });
 
 /* --------- POST Handlers ---------- */

@@ -34,8 +34,8 @@ export default class Splash extends React.Component {
 
       <div className="splash-top-bar-title">Discover Austin!</div>
       <ul>
-        <li>Log in</li>
-        <li>Sign up</li>
+        <a href="/auth/facebook"><li>Log in</li></a>
+        <a href="/auth/facebook"><li>Sign up</li></a>
       </ul>
     </section>
     <section className="splash-banner">
@@ -43,7 +43,7 @@ export default class Splash extends React.Component {
       <div>
         <h1>Hello Austin</h1>
         <h2>Get ready for adventure</h2>
-        <a href="/login">GET STARTED - IT'S FREE</a>
+        <a href="/auth/facebook">GET STARTED - IT'S FREE</a>
       </div>
     </section>
   </div>
