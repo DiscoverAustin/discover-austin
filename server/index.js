@@ -104,9 +104,6 @@ passport.use(new FacebookStrategy({
 /* --------- GET Handlers ---------- */
 
 app.get('/', (req, res) => {
-  console.log('cookies: ', req.cookies);
-  console.log('req.session: ', req.session);
-  console.log('is logged in on /?: ', req.isAuthenticated());
   if (!req.isAuthenticated()) {
     res.sendFile(path.join(DIST_DIR, 'login.html'));
   } else {

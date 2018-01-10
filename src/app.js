@@ -5,7 +5,6 @@ import MainPage from './mainPage';
 import Leaderboard from './leaderboard';
 import Profile from './profile';
 import Challenges from './challenges';
-// import Splash from './splashPage';
 import NotFoundPage from './notFoundPage';
 import Navbar from './navbar';
 
