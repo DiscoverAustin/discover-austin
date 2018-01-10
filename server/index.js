@@ -103,15 +103,6 @@ passport.use(new FacebookStrategy({
 
 /* --------- GET Handlers ---------- */
 
-// app.get('/login', (req, res) => {
-//   res.sendFile(path.join(DIST_DIR, 'index.html'));
-//   // res.end('no');
-// });
-
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(DIST_DIR, 'login.html'));
-// });
-
 app.get('/', (req, res) => {
   console.log('cookies: ', req.cookies);
   console.log('req.session: ', req.session);
@@ -139,7 +130,7 @@ app.get('/auth/facebook/callback', passport.authenticate(
   },
 ));
 
-// Authentication Check for All Subsequent Routes
+// Authentication check for all subsequent routes
 app.get('*', (req, res, next) => {
   if (!req.isAuthenticated()) {
     res.redirect('/');
@@ -207,10 +198,8 @@ app.post('/api/logout', (req, res) => {
   res.sendFile(path.join(DIST_DIR, 'login.html'));
 });
 
-/* --------- POST Handlers ---------- */
-
-
-// Default route fallback (allows React Router to handle all other routing)
+/* --------- Default Fallback Route ---------- */
+// Default route fallback allows React Router to handle all other routing
 app.get('*', (req, res) => {
   if (!req.isAuthenticated()) {
     res.sendFile(path.join(DIST_DIR, 'login.html'));
@@ -218,7 +207,6 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(DIST_DIR, 'index.html'));
   }
 });
-
 
 http.listen(port, () => {
   console.log(`Listening on port ${port}`);
