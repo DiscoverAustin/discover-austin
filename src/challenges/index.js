@@ -1,11 +1,9 @@
 import React from 'react';
-import Nav from '../mainPage/Navbar';
 
 export default class Challenges extends React.Component {
   constructor() {
     super();
     this.state = {
-      showMenu: false,
       query: 'all',
       challenges: [
         {
@@ -252,7 +250,6 @@ export default class Challenges extends React.Component {
 
   render = () => (
     <div>
-      <Nav showMenu={this.state.showMenu} toggleMenu={this.toggleMenu} />
       <h1 className="pagetitle">Challenges</h1>
       <div className="challengescontainer">
         {this.state.challenges.map((challenge, index) => (
