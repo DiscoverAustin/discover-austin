@@ -1,13 +1,13 @@
 const mysql = require('promise-mysql');
 const mysqlConfig = require('./config.js');
+const mysql2 = require('mysql');
+
 
 const connection = mysql.createConnection(mysqlConfig)
-  .then((conn) => {
-    console.log('Successfully connected to mysql database!');
-    return conn;
-  })
   .catch(e => console.error('Error connecting to mysql database!: ', e.stack));
 
+// Non-promisified mysql connection. Used solely for session storage
+const connection2 = mysql2.createConnection(mysqlConfig);
 
 const getAllUsers = () => (
   connection
@@ -27,13 +27,43 @@ const getUserInfo = id => (
     })
 );
 
+const getUserByFacebookId = facebookId => (
+  connection
+    .then(db => db.query(`SELECT * FROM users WHERE facebook_id = ${facebookId}`))
+);
+
 const getUserAchievements = id => (
   connection
-    .then(db => db.query(`SELECT * FROM achievements a, users_achievements ua, users u 
+    .then(db => db.query(`SELECT * FROM achievements a, users_achievements ua, users u
                           WHERE u.id = ${id} AND a.id = ua.achievement_id AND u.id = ua.user_id`))
     .catch((e) => {
       console.error('Error retreiving from database!: ', e);
       throw (e);
+    })
+);
+
+const createUser = (userInfo) => {
+  const { firstName, lastName, email, facebookId, pictureUrl } = userInfo;
+  connection
+    .then(db => db.query(`
+      INSERT INTO users (first_name, last_name, email, facebook_id, picture_url)
+      VALUES ('${firstName}', '${lastName}', '${email}', ${facebookId}, '${pictureUrl}');`))
+    .catch((e) => {
+      console.error('Error inserting user into database!: ', e);
+      throw (e);
+    });
+};
+
+const findOrCreateUser = userInfo => (
+  getUserByFacebookId(userInfo.facebookId)
+    .then((userArray) => {
+      if (userArray.length) {
+        return JSON.parse(JSON.stringify(userArray[0]));
+      }
+      return createUser(userInfo);
+    })
+    .catch((e) => {
+      console.error('Error findingOrCreatingUser!: ', e);
     })
 );
 
@@ -45,17 +75,6 @@ const getLeaderboard = () => (
       throw (e);
     })
 );
-
-// this one will need to be updated w/ first name / last name parameters once schema is updated
-const addNewUser = (name, email, facebookId, pictureUrl) => (
-  connection
-    .then(db => db.query(`INSERT INTO users (name, email, facebook_id, picture_url, total_points) VALUES (${name}, ${email}, ${facebookId}, ${pictureUrl}, 0)`))
-    .catch((e) => {
-      console.error('Error retreiving from database!: ', e);
-      throw (e);
-    })
-);
-
 
 const updateUserTotalPoints = newPointTotal => (
   connection
@@ -93,11 +112,14 @@ const getAllAchievements = () => (
 );
 
 module.exports = {
+  connection2,
   getAllUsers,
   getUserInfo,
+  getUserByFacebookId,
+  createUser,
+  findOrCreateUser,
   getLeaderboard,
   addCompletedAchievement,
-  addNewUser,
   getUserAchievements,
   updateUserTotalPoints,
   getAllAchievements,
