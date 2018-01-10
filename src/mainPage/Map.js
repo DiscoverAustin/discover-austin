@@ -14,11 +14,11 @@ export default class MapPage extends React.Component {
   }
 
   render() {
-    const markers = [
-      { key: 'marker1', position: [51.5, -0.1], children: 'My first popup' },
-      { key: 'marker2', position: [51.51, -0.1], children: 'My second popup' },
-      { key: 'marker3', position: [51.49, -0.05], children: 'My third popup' },
-    ];
+    // const markers = [
+    //   { key: 'marker1', position: [51.5, -0.1], children: 'My first popup' },
+    //   { key: 'marker2', position: [51.51, -0.1], children: 'My second popup' },
+    //   { key: 'marker3', position: [51.49, -0.05], children: 'My third popup' },
+    // ];
 
     const hillary = [
       {
@@ -191,14 +191,8 @@ export default class MapPage extends React.Component {
        <TileLayer
          url={stamenTonerTiles}
        />
-      { hillary.map((x => {
-          return (
-            <Marker
-               position={x[0].location}
-               ref="marker">
-            </Marker>
-          )
-        }) }
+    {hillary.map(loc => (
+        <Marker position={loc.location}></Marker>))}
     </Map>
     );
   }
