@@ -101,6 +101,27 @@ export default class Splash extends React.Component {
         <p>- { this.state.quotes[0].name }</p>
       </div>
     </section>
+    <section className="splash-team">
+      <h1>Meet the team</h1>
+      <div className="splash-team-people">
+      <div className="splash-team-person">
+        <div><img src="https://avatars0.githubusercontent.com/u/5833874?s=400&v=4" /></div>
+        <h5>Nathan Chackerian</h5>
+      </div>
+      <div className="splash-team-person">
+        <div><img src="https://avatars2.githubusercontent.com/u/15621096?s=400&v=4" /></div>
+        <h5>Kendrick Gardner</h5>
+      </div>
+      <div className="splash-team-person">
+        <div><img src="https://avatars3.githubusercontent.com/u/33075304?s=400&v=4" /></div>
+        <h5>Rick Gomez</h5>
+      </div>
+      <div className="splash-team-person">
+        <div><img src="https://avatars2.githubusercontent.com/u/29362180?s=400&v=4" /></div>
+        <h5>Edward White</h5>
+      </div>
+      </div>
+    </section>
   </div>
   )
 }
