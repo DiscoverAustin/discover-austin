@@ -1,4 +1,3 @@
-// npm packages
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
@@ -7,16 +6,13 @@ const path = require('path');
 const morgan = require('morgan');
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
+const MySQLStore = require('express-mysql-session')(session);
 
 const db = require('../db');
 
-/*
-This block below allows both express-http requests &
-socket.io socket connections to be simultaneously served:
-*/
 const app = express();
-
 const http = require('http').Server(app);
+
 const io = require('socket.io')(http);
 const socket = require('./sockets');
 
@@ -28,34 +24,51 @@ const CLIENT_DIR = path.join(__dirname, '../src/');
 const CLIENT_SECRET = global.CLIENT_SECRET ? global.CLIENT_SECRET : require('./secrets/secrets.js'); // eslint-disable-line
 
 const port = process.env.PORT || 3000;
-const APP_DOMAIN = process.env.DOMAIN || `http://localhost:${port}`;
+const APP_DOMAIN = process.env.DOMAIN || 'http://localhost';
+const host = `${APP_DOMAIN}:${port}`;
+
+const sessionStoreOptions = {
+  checkExpirationInterval: 1000 * 60 * 15, // Every 15 minutes
+  expiration: 1000 * 60 * 60 * 24, // Every 24 hours
+  createDatabaseTable: true,
+  schema: {
+    tableName: 'Sessions',
+    columnNames: {
+      session_id: 'session_id',
+      expires: 'expires',
+      data: 'data',
+    },
+  },
+};
+
+const sessionStore = new MySQLStore(sessionStoreOptions, db.connection2);
 
 const sessionOptions = {
   saveUninitialized: false,
   resave: false,
-  // store: sessionStore,
   secret: 'Was zum Teufel!',
+  maxAge: 1000 * 60 * 15,
+  store: sessionStore,
+  name: 'discoverAustin',
 };
 
 app.use(express.static(DIST_DIR));
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser((user, done) => {
-  console.log('user from serialization: ', user);
   done(null, user.facebook_id);
 });
 
 passport.deserializeUser((facebookId, done) => {
-  console.log('user from deserialization: ', facebookId);
+  console.log('deserialize!');
   db.getUserByFacebookId(facebookId)
     .then((foundUser) => {
-      console.log('res deserialization: ', foundUser);
       done(null, foundUser);
     })
     .catch((e) => {
@@ -66,11 +79,10 @@ passport.deserializeUser((facebookId, done) => {
 passport.use(new FacebookStrategy({
   clientID: '158163551574274',
   clientSecret: CLIENT_SECRET,
-  callbackURL: `${APP_DOMAIN}/auth/facebook/callback`,
+  callbackURL: `${host}/auth/facebook/callback`,
   profileFields: ['first_name', 'last_name', 'email', 'picture.type(large)'],
   enableProof: true,
 }, (accessToken, refreshToken, profile, done) => {
-  console.log('new profile!: ', profile);
   const facebookId = profile.id;
   const { familyName: lastName, givenName: firstName } = profile.name;
   const email = profile.emails[0].value;
@@ -85,23 +97,16 @@ passport.use(new FacebookStrategy({
   db.findOrCreateUser(userInfo)
     .then((result) => {
       done(null, result);
-    });
+    })
+    .catch((e) => { console.error(e); });
 }));
 
 /* --------- GET Handlers ---------- */
-
 app.get('*', (req, res, next) => {
   console.log('req.user: ', req.user);
+  // console.log('req.user: ', JSON.parse(JSON.stringify(req.user)));
   console.log('req.session: ', req.session);
   next();
-});
-
-app.get('/src/styles/styles.css', (req, res) => {
-  res.sendFile(path.join(CLIENT_DIR, 'styles/styles.css'));
-});
-
-app.get('/src/styles/leaflet.css', (req, res) => {
-  res.sendFile(path.join(CLIENT_DIR, 'styles/leaflet.css'));
 });
 
 app.get('/auth/facebook', passport.authenticate(
@@ -117,14 +122,27 @@ app.get('/auth/facebook/callback', passport.authenticate(
   { failureRedirect: '/login' },
 ), (req, res) => { res.redirect('/'); });
 
-app.get('/hahah', (req, res) => {
-  res.send('bahahaha').end('hahaha');
+
+app.get('/src/styles/styles.css', (req, res) => {
+  res.sendFile(path.join(CLIENT_DIR, 'styles/styles.css'));
 });
 
-app.get('/login', (req, res) => {
-  res.send('lol wrong').end('lolol wrong');
+app.get('/src/styles/leaflet.css', (req, res) => {
+  res.sendFile(path.join(CLIENT_DIR, 'styles/leaflet.css'));
 });
 
+
+// app.get('/login', (req, res) => {
+//   res.send('lol wrong').end('lolol wrong');
+// });
+//
+// app.get('*', (req, res) => {
+//   console.log('isAuthenticated: ', req.isAuthenticated());
+//   console.log('req.session: ', req.sesssion);
+//
+//   // next();
+//   res.sendFile(path.join(DIST_DIR, 'index.html'));
+// });
 /* --------- API Routes ---------- */
 
 app.get('/api/leaderboard', (req, res) => {
@@ -178,6 +196,7 @@ app.get('/api/getAllUsers', (req, res) => {
 
 // Default route fallback (allows React Router to handle all other routing)
 app.get('*', (req, res) => {
+  console.log('isAuthenticated: ', req.isAuthenticated());
   res.sendFile(path.join(DIST_DIR, 'index.html'));
 });
 

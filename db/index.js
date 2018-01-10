@@ -1,13 +1,13 @@
 const mysql = require('promise-mysql');
 const mysqlConfig = require('./config.js');
+const mysql2 = require('mysql');
+
 
 const connection = mysql.createConnection(mysqlConfig)
-  .then((conn) => {
-    console.log('Successfully connected to mysql database!');
-    return conn;
-  })
   .catch(e => console.error('Error connecting to mysql database!: ', e.stack));
 
+// Non-promisified mysql connection solely for session storage
+const connection2 = mysql2.createConnection(mysqlConfig);
 
 const getAllUsers = () => (
   connection
@@ -51,15 +51,10 @@ const createUser = (userInfo) => {
 const findOrCreateUser = userInfo => (
   getUserByFacebookId(userInfo.facebookId)
     .then((userArray) => {
-      console.log('result from findOrCreateUser!: ', userArray);
       if (userArray.length) {
         return JSON.parse(JSON.stringify(userArray[0]));
       }
       return createUser(userInfo);
-    })
-    .then((res) => {
-      console.log('res from getUserByFacebookId: ', res);
-      return res;
     })
     .catch((e) => {
       console.error('Error findingOrCreatingUser!: ', e);
@@ -68,6 +63,7 @@ const findOrCreateUser = userInfo => (
 );
 
 module.exports = {
+  connection2,
   getAllUsers,
   getUserInfo,
   getUserByFacebookId,
