@@ -7,4 +7,4 @@
 
 const CLIENT_SECRET = 'INSERT_SECRET_FROM_FB_DEVELOPER_CONSOLE!';
 
-export default CLIENT_SECRET;
+module.exports = CLIENT_SECRET;
