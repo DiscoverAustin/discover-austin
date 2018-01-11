@@ -1,27 +1,29 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import Leaders from './Leaders';
 
-export default class Leaderboard extends React.Component {
+export default class Leaderboard extends Component {
   constructor() {
     super();
     this.state = { leaders: [] };
   }
 
   componentWillMount = () => {
-    axios.get('http://localhost:3000/api/leaderboard')
+    axios.get('/api/leaderboard')
       .then((res) => {
         this.setState({ leaders: res.data });
       })
-      .catch((e) => { console.log(e); });
+      .catch((e) => { console.error(e); });
   }
 
   render = () => (
     <div>
       <h1 className="pagetitle">Leaderboard</h1>
-      {this.state.leaders.map((leader, index) => (
-        <Leaders leader={leader} index={index} key={index} />
-      ))}
+      {
+        this.state.leaders.map((leader, index) => (
+          <Leaders leader={leader} index={index} key={index} />
+        ))
+      }
     </div>
   )
 }

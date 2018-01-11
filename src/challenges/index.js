@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default class Challenges extends React.Component {
+export default class Challenges extends Component {
   constructor() {
     super();
     this.state = {
@@ -176,14 +176,13 @@ export default class Challenges extends React.Component {
         achievements: ['State Capitol', 'Hack Reactor', 'The Driskell'],
       },
     };
-    this.toggleMenu = this.toggleMenu.bind(this);
   }
 
-  handleClick(query) {
+  handleClick = (query) => {
     this.setState({ query });
   }
 
-  filterChallenges(challenge, index) {
+  filterChallenges = (challenge, index) => {
     if (this.state.query === 'completed') {
       if (this.state.user.achievements.includes(challenge.name)) {
         return (
@@ -244,17 +243,15 @@ export default class Challenges extends React.Component {
     );
   }
 
-  toggleMenu() {
-    this.setState({ showMenu: !this.state.showMenu });
-  }
-
   render = () => (
     <div>
       <h1 className="pagetitle">Challenges</h1>
       <div className="challengescontainer">
-        {this.state.challenges.map((challenge, index) => (
-          this.filterChallenges(challenge, index)
-          ))}
+        {
+          this.state.challenges.map((challenge, index) => (
+            this.filterChallenges(challenge, index)
+          ))
+        }
       </div>
       <footer className="challenges-footer">
         <ul>

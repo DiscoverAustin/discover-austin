@@ -29,8 +29,8 @@ const APP_DOMAIN = process.env.DOMAIN || 'http://localhost';
 const host = `${APP_DOMAIN}:${port}`;
 
 const sessionStoreOptions = {
-  checkExpirationInterval: 1000 * 5, // Every 15 minutes
-  expiration: 1000 * 60 * 60 * 48, // Every 24 hours
+  checkExpirationInterval: 1000 * 60 * 15, // Every 15 minutes
+  expiration: 1000 * 60 * 60 * 48, // Every 48 hours
   createDatabaseTable: true,
   schema: {
     tableName: 'Sessions',
@@ -61,6 +61,9 @@ app.use(bodyParser.json());
 app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+/* --------- Passport/Facebook Authentication Setup ---------- */
 
 passport.serializeUser((user, done) => {
   done(null, user.facebook_id);
@@ -101,6 +104,7 @@ passport.use(new FacebookStrategy({
     .catch((e) => { console.error(e); });
 }));
 
+
 /* --------- GET Handlers ---------- */
 
 app.get('/', (req, res) => {
@@ -135,6 +139,7 @@ app.get('*', (req, res, next) => {
     next();
   }
 });
+
 
 /* --------- API Routes ---------- */
 
@@ -195,8 +200,9 @@ app.post('/api/logout', (req, res) => {
   res.sendFile(path.join(DIST_DIR, 'login.html'));
 });
 
+
 /* --------- Default Fallback Route ---------- */
-// Default route fallback allows React Router to handle all other routing
+
 app.get('*', (req, res) => {
   if (!req.isAuthenticated()) {
     res.sendFile(path.join(DIST_DIR, 'login.html'));
@@ -204,6 +210,9 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(DIST_DIR, 'index.html'));
   }
 });
+
+
+/* --------- Server Initialization ---------- */
 
 http.listen(port, () => {
   console.log(`Listening on port ${port}`);

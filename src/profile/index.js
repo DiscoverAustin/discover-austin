@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 
-export default class Leaderboard extends React.Component {
+export default class Leaderboard extends Component {
   constructor(props) {
     super(props);
     this.state = {

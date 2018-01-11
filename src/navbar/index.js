@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-export default class Navbar extends React.Component {
+export default class Navbar extends Component {
   constructor() {
     super();
     this.state = { showMenu: false };
@@ -37,7 +37,7 @@ export default class Navbar extends React.Component {
           <Link to="/profile"><div className="option">Profile</div></Link>
           <Link to="/leaderboard"><div className="option">Leaderboard</div></Link>
           <Link to="/challenges"><div className="option">Challenges</div></Link>
-          <a href="/" onClick={this.handleLogout}><div className="option" id="link3">Logout</div></a>
+          <a href="/" onClick={ this.handleLogout }><div className="option" id="link3">Logout</div></a>
         </div>
       }
     </div>
