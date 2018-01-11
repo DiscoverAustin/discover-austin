@@ -39,6 +39,10 @@ export default class SplashContainer extends Component {
   }
 
   render = () => (
-    <SplashContent showMenu={ this.state.showMenu } toggleMenu={ this.toggleMenu }/>
+    <SplashContent
+      showMenu={ this.state.showMenu }
+      toggleMenu={ this.toggleMenu }
+      quotes = { this.state.quotes }
+    />
   )
 }

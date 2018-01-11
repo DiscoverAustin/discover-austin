@@ -22,7 +22,7 @@ const DIST_DIR = path.join(__dirname, '../dist');
 const BUNDLE = path.join(__dirname, '../dist/bundle');
 const CLIENT_DIR = path.join(__dirname, '../src/');
 
-const CLIENT_SECRET = global.CLIENT_SECRET ? global.CLIENT_SECRET : require('./secrets/secrets.js'); // eslint-disable-line
+const CLIENT_SECRET = global.CLIENT_SECRET ? global.CLIENT_SECRET : require('../secrets'); // eslint-disable-line
 
 const port = process.env.PORT || 3000;
 const APP_DOMAIN = process.env.DOMAIN || 'http://localhost';

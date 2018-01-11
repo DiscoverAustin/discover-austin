@@ -74,8 +74,8 @@ const SplashContent = props => (
     <section className="splash-quotes">
       <div>
         <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/19279-200.png" />
-        <h3>"{ this.state.quotes[0].text }"</h3>
-        <p> - { this.state.quotes[0].name }</p>
+        <h3>"{ props.quotes[0].text }"</h3>
+        <p> - { props.quotes[0].name }</p>
       </div>
     </section>
 
