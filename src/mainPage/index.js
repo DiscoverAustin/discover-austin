@@ -1,27 +1,21 @@
 import React from 'react';
+import axios from 'axios';
 import MapPage from './Map';
 import Feed from './Feed';
+
 
 export default class MainPage extends React.Component {
   constructor() {
     super();
-    this.state = { feed: [
-      {
-        name: 'Stephen Hawking',
-        achievement: 'Barton Springs',
-        yelp: 'https://www.yelp.com/biz/barton-springs-pool-austin',
-      },
-      {
-        name: 'Nathan C',
-        achievement: 'Chipotle',
-        yelp: 'https://www.yelp.com/biz/chipotle-mexican-grill-austin-15?osq=Chipotle+Mexican+Grill',
-      },
-      {
-        name: 'Batman',
-        achievement: 'State Capitol',
-        yelp: 'https://www.yelp.com/biz/hack-reactor-austin-austin',
-      },
-    ] };
+    this.state = { feed: [] };
+  }
+
+  componentWillMount = () => {
+    axios.get('http://localhost:3000/api/feed')
+      .then((res) => {
+        this.setState({ feed: res.data });
+      })
+      .catch((e) => { console.log(e); });
   }
 
   render = () => (
