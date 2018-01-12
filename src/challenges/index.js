@@ -181,6 +181,7 @@ export default class Challenges extends React.Component {
 
   handleClick(query) {
     this.setState({ query });
+    window.scroll(0, 0);
   }
 
   filterChallenges(challenge, index) {
@@ -249,7 +250,7 @@ export default class Challenges extends React.Component {
   }
 
   render = () => (
-    <div>
+    <div className="component-container">
       <h1 className="pagetitle">Challenges</h1>
       <div className="challengescontainer">
         {this.state.challenges.map((challenge, index) => (

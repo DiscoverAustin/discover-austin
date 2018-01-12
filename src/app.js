@@ -7,12 +7,15 @@ import Profile from './profile';
 import Challenges from './challenges';
 import NotFoundPage from './notFoundPage';
 import Navbar from './navbar';
+import Sidebar from './sidebar';
+import Weather from './weather';
 
 const App = () => (
   <div>
     <BrowserRouter>
       <div>
         <Navbar />
+        <Sidebar />
         <Switch>
           <Route path='/' exact={ true } component={ MainPage } />
           <Route path='/leaderboard' component={ Leaderboard } />
@@ -20,6 +23,7 @@ const App = () => (
           <Route path='/challenges' component={ Challenges } />
           <Route component={ NotFoundPage } />
         </Switch>
+        <Weather />
       </div>
     </BrowserRouter>
   </div>
