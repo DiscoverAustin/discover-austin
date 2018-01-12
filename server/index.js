@@ -115,7 +115,7 @@ app.get('/auth/facebook/callback', passport.authenticate(
   {
     failureRedirect: '/',
     successRedirect: '/',
-  },
+  }
 ));
 
 app.get('/auth/facebook', passport.authenticate(
@@ -123,7 +123,7 @@ app.get('/auth/facebook', passport.authenticate(
   {
     authType: 'rerequest',
     scope: ['email', 'public_profile'],
-  },
+  }
 ));
 
 
@@ -146,8 +146,8 @@ app.get('/api/leaderboard', (req, res) => {
 });
 
 app.get('/api/getUserInfo', (req, res) => {
-  const { id } = req.body;
-  db.getUserInfo(id)
+  const { facebookId } = req.query;
+  db.getUserInfo(facebookId)
     .then((user) => { res.send(user); })
     .catch((e) => { console.error(e); });
 });

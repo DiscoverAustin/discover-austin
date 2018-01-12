@@ -6,7 +6,7 @@ const Feed = props => (
   {props.feed.map((person, index) => (
     <div className="feeditem" key={index} >
       <p>
-        <Link to={`/profile/${person.name}`}>
+        <Link to={`/profile/${person.facebook_id}`}>
           <span className="user">{person.first_name} {person.last_name}</span>
         </Link> has unlocked the
         <span className="achievement"><a href={person.yelp_url} target="_blank"> {person.description}</a></span> achievement

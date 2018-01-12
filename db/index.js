@@ -18,9 +18,9 @@ const getAllUsers = () => (
     })
 );
 
-const getUserInfo = id => (
+const getUserInfo = facebookId => (
   connection
-    .then(db => db.query(`SELECT * FROM users WHERE id = ${id}`))
+    .then(db => db.query(`SELECT * FROM users WHERE facebook_id = ${facebookId}`))
     .catch((e) => {
       console.error('Error retreiving from database!: ', e);
       throw (e);
