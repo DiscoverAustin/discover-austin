@@ -110,13 +110,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(DIST_DIR, 'index.html'));
   }
 });
-app.get('/auth/facebook/callback', passport.authenticate(
-  'facebook',
-  {
-    failureRedirect: '/',
-    successRedirect: '/',
-  },
-));
 
 app.get('/auth/facebook', passport.authenticate(
   'facebook',
@@ -126,10 +119,15 @@ app.get('/auth/facebook', passport.authenticate(
   },
 ));
 
+app.get('/auth/facebook/callback', passport.authenticate(
+  'facebook',
+  {
+    failureRedirect: '/',
+    successRedirect: '/',
+  },
+));
 
 // Authentication check for all subsequent routes
-
-/* --------- API Routes ---------- */
 app.get('*', (req, res, next) => {
   if (!req.isAuthenticated()) {
     res.redirect('/');
@@ -138,11 +136,38 @@ app.get('*', (req, res, next) => {
   }
 });
 
+/* --------- API Routes ---------- */
+
 app.get('/api/leaderboard', (req, res) => {
-  db.getLeaderboard()
-    .then((leaders) => {
-      res.send(JSON.stringify(leaders)).status(201).end();
-    });
+  const leaders = [
+    {
+      name: 'Bob',
+      score: 1,
+    }, {
+      name: 'Bobby',
+      score: 2,
+    }, {
+      name: 'Rob',
+      score: 10,
+    }, {
+      name: 'Robert',
+      score: 12,
+    }, {
+      name: 'Bobbina',
+      score: 14,
+    }, {
+      name: 'Bobber',
+      score: 119,
+    }, {
+      name: 'Billy Bob',
+      score: 205,
+    }, {
+      name: 'Bob the Builder',
+      score: 1000,
+    },
+  ].sort((a, b) => b.score - a.score);
+  const stringifiedLeaders = JSON.stringify(leaders);
+  res.send(stringifiedLeaders).status(201).end();
 });
 
 app.get('/api/getUserInfo', (req, res) => {
@@ -158,21 +183,9 @@ app.get('/api/getAllUsers', (req, res) => {
     .catch((e) => { console.error(e); });
 });
 
-app.get('/api/getAllAchievements', (req, res) => {
-  db.getAllAchievements()
-    .then((achievements) => { res.send(achievements); })
-    .catch((e) => { console.error(e); });
-});
-
 app.get('/api/isLoggedIn', (req, res) => {
   const isLoggedIn = req.isAuthenticated();
   res.send({ isLoggedIn }).end();
-});
-
-app.get('/api/feed', (req, res) => {
-  db.getFeed()
-    .then((feed) => { res.send(feed); })
-    .catch((e) => { console.error(e); });
 });
 
 app.post('/api/logout', (req, res) => {
