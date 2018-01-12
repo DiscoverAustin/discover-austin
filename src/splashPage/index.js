@@ -54,8 +54,8 @@ export default class Splash extends React.Component {
         </div>
         {this.state.showMenu ?
         <div className="menu">
-          <div className="option" id="link1">Log in</div>
-          <div className="option">Sign up</div>
+          <a href="/auth/facebook"><div className="option" id="link1">Log in</div></a>
+          <a href="/auth/facebook"><div className="option">Sign up</div></a>
         </div> : null}
       </div>
 
