@@ -7,9 +7,9 @@ const Leaders = props => (
       <p className="leaders">
         {props.index + 1}.
         <Link to={`/profile/${props.leader.name}`}>
-          <span className="user" > { props.leader.name }</span>
+          <span className="user" > { props.leader.first_name } {props.leader.last_name} </span>
         </Link>
-        <span className="score"> { props.leader.score }</span>
+        <span className="score"> { props.leader.total_points }</span>
       </p>
     </div>
   </section>
