@@ -160,6 +160,20 @@ app.get('/api/getAllUsers', (req, res) => {
     .catch((e) => { console.error(e); });
 });
 
+app.get('/api/getUserAchievements', (req, res) => {
+  let { facebookId } = req.query;
+  if (!req.query.facebookId) {
+    facebookId = req.user[0].facebook_id;
+  }
+  db.getUserAchievements(facebookId)
+    .then((achievements) => {
+      const achievArray = [];
+      achievements.map(elem => achievArray.push(elem.description));
+      res.send(achievArray);
+    })
+    .catch((e) => { console.error(e); });
+});
+
 app.get('/api/getAllAchievements', (req, res) => {
   db.getAllAchievements()
     .then((achievements) => { res.send(achievements); })

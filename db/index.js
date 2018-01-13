@@ -32,10 +32,10 @@ const getUserByFacebookId = facebookId => (
     .then(db => db.query(`SELECT * FROM users WHERE facebook_id = ${facebookId}`))
 );
 
-const getUserAchievements = id => (
+const getUserAchievements = facebookId => (
   connection
     .then(db => db.query(`SELECT * FROM achievements a, users_achievements ua, users u
-                          WHERE u.id = ${id} AND a.id = ua.achievement_id AND u.id = ua.user_id`))
+                          WHERE u.facebook_id = ${facebookId} AND a.id = ua.achievement_id AND u.id = ua.user_id`))
     .catch((e) => {
       console.error('Error retreiving from database!: ', e);
       throw (e);
