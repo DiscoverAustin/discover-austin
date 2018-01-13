@@ -69,7 +69,7 @@ const findOrCreateUser = userInfo => (
 
 const getLeaderboard = () => (
   connection
-    .then(db => db.query('SELECT first_name, last_name, total_points FROM users ORDER BY total_points DESC LIMIT 10'))
+    .then(db => db.query('SELECT first_name, last_name, facebook_id, total_points FROM users ORDER BY total_points DESC LIMIT 10'))
     .catch((e) => {
       console.error('Error retreiving from database!: ', e);
       throw (e);

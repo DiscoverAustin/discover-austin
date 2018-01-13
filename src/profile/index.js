@@ -1,27 +1,31 @@
 import React from 'react';
 import axios from 'axios';
 
-export default class Leaderboard extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      showMenu: false,
-      user: {},
-    };
-  }
-
-  toggleMenu() {
-    this.setState({ showMenu: !this.state.showMenu });
+export default class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { user: this.props.user };
   }
 
   componentDidMount = () => {
     const param = window.location.pathname.split('/')[2];
+    console.log('pulling the data for: ', param);
     axios.get('http://localhost:3000/api/getUserInfo', { params: { facebookId: param } })
       .then((res) => {
         this.setState({ user: res.data[0] });
       })
       .catch((e) => { console.log(e); });
   }
+
+  // componentWillUpdate = () => {
+  //   const param = window.location.pathname.split('/')[2];
+  //   console.log('pulling the data for: ', param);
+  //   axios.get('http://localhost:3000/api/getUserInfo', { params: { facebookId: param } })
+  //     .then((res) => {
+  //       this.setState({ user: res.data[0] });
+  //     })
+  //     .catch((e) => { console.log(e); });
+  // }
 
    render = () => (
      <div>
