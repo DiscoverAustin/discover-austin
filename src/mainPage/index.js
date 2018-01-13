@@ -19,7 +19,7 @@ export default class MainPage extends React.Component {
   }
 
   render = () => (
-    <div>
+    <div className="component-container">
       <MapPage />
       <Feed feed={this.state.feed} />
     </div>

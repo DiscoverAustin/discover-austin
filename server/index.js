@@ -115,7 +115,7 @@ app.get('/auth/facebook/callback', passport.authenticate(
   {
     failureRedirect: '/',
     successRedirect: '/',
-  }
+  },
 ));
 
 app.get('/auth/facebook', passport.authenticate(
@@ -123,9 +123,8 @@ app.get('/auth/facebook', passport.authenticate(
   {
     authType: 'rerequest',
     scope: ['email', 'public_profile'],
-  }
+  },
 ));
-
 
 // Authentication check for all subsequent routes
 

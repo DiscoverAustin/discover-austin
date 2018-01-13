@@ -28,7 +28,7 @@ const Nav = (props) => {
           <Link to="/profile"><div className="option">Profile</div></Link>
           <Link to="/leaderboard"><div className="option">Leaderboard</div></Link>
           <Link to="/challenges"><div className="option">Challenges</div></Link>
-          <a href="/" onClick={logout}><div className="option" id="link3">Logout</div></a>
+          <Link to="/" onClick={logout}><div className="option" id="link3">Logout</div></Link>
         </div>
       }
     </div>
