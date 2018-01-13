@@ -9,7 +9,6 @@ export default class Profile extends React.Component {
 
   componentDidMount = () => {
     const param = window.location.pathname.split('/')[2];
-    console.log('pulling the data for: ', param);
     axios.get('http://localhost:3000/api/getUserInfo', { params: { facebookId: param } })
       .then((res) => {
         this.setState({ user: res.data[0] });

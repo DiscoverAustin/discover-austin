@@ -115,7 +115,7 @@ app.get('/auth/facebook/callback', passport.authenticate(
   {
     failureRedirect: '/',
     successRedirect: '/',
-  },
+  }
 ));
 
 app.get('/auth/facebook', passport.authenticate(
@@ -123,7 +123,7 @@ app.get('/auth/facebook', passport.authenticate(
   {
     authType: 'rerequest',
     scope: ['email', 'public_profile'],
-  },
+  }
 ));
 
 // Authentication check for all subsequent routes
@@ -157,6 +157,20 @@ app.get('/api/getUserInfo', (req, res) => {
 app.get('/api/getAllUsers', (req, res) => {
   db.getAllUsers()
     .then((users) => { res.send(users); })
+    .catch((e) => { console.error(e); });
+});
+
+app.get('/api/getUserAchievements', (req, res) => {
+  let { facebookId } = req.query;
+  if (!req.query.facebookId) {
+    facebookId = req.user[0].facebook_id;
+  }
+  db.getUserAchievements(facebookId)
+    .then((achievements) => {
+      const achievArray = [];
+      achievements.map(elem => achievArray.push(elem.description));
+      res.send(achievArray);
+    })
     .catch((e) => { console.error(e); });
 });
 
