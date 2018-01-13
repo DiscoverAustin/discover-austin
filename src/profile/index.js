@@ -17,18 +17,8 @@ export default class Profile extends React.Component {
       .catch((e) => { console.log(e); });
   }
 
-  // componentWillUpdate = () => {
-  //   const param = window.location.pathname.split('/')[2];
-  //   console.log('pulling the data for: ', param);
-  //   axios.get('http://localhost:3000/api/getUserInfo', { params: { facebookId: param } })
-  //     .then((res) => {
-  //       this.setState({ user: res.data[0] });
-  //     })
-  //     .catch((e) => { console.log(e); });
-  // }
-
    render = () => (
-     <div>
+     <div className='component-container'>
        <div className="prof">
          <img className="profImage" src={ this.state.user.picture_url }/>
          <h2> { this.state.user.first_name } { this.state.user.last_name } </h2>
