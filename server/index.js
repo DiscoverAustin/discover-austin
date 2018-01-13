@@ -126,7 +126,6 @@ app.get('/auth/facebook', passport.authenticate(
   },
 ));
 
-
 // Authentication check for all subsequent routes
 
 /* --------- API Routes ---------- */
@@ -146,8 +145,11 @@ app.get('/api/leaderboard', (req, res) => {
 });
 
 app.get('/api/getUserInfo', (req, res) => {
-  const { id } = req.body;
-  db.getUserInfo(id)
+  let { facebookId } = req.query;
+  if (!req.query.facebookId) {
+    facebookId = req.user[0].facebook_id;
+  }
+  db.getUserInfo(facebookId)
     .then((user) => { res.send(user); })
     .catch((e) => { console.error(e); });
 });

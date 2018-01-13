@@ -19,7 +19,7 @@ const App = () => (
         <Switch>
           <Route path='/' exact={ true } component={ MainPage } />
           <Route path='/leaderboard' component={ Leaderboard } />
-          <Route path='/profile' component={ Profile } />
+          <Route path='/profile' render={() => <Profile user='{}'/>} />
           <Route path='/challenges' component={ Challenges } />
           <Route component={ NotFoundPage } />
         </Switch>

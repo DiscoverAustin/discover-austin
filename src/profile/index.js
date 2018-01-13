@@ -1,18 +1,29 @@
 import React from 'react';
+import axios from 'axios';
 
-export default class Leaderboard extends React.Component {
-  constructor() {
-    super();
-    this.state = { leaders: [] };
+export default class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { user: this.props.user };
   }
 
- render = () => (
-   <div className="component-container">
-     <div className="prof">
-       <img className="profImage" src="https://images.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.warstore.co.uk%2Fekmps%2Fshops%2Fmarlina%2Fimages%2Fplain-blue-3-x-2-flag-2482-p.jpg&f=1"/>
-       <h2> Nathan Chackerian </h2>
-       <h2> <span className="score">2343</span> points</h2>
+  componentDidMount = () => {
+    const param = window.location.pathname.split('/')[2];
+    console.log('pulling the data for: ', param);
+    axios.get('http://localhost:3000/api/getUserInfo', { params: { facebookId: param } })
+      .then((res) => {
+        this.setState({ user: res.data[0] });
+      })
+      .catch((e) => { console.log(e); });
+  }
+
+   render = () => (
+     <div className='component-container'>
+       <div className="prof">
+         <img className="profImage" src={ this.state.user.picture_url }/>
+         <h2> { this.state.user.first_name } { this.state.user.last_name } </h2>
+         <h2> <span className="score">{ this.state.user.total_points }</span> points</h2>
+       </div>
      </div>
-   </div>
- )
+   )
 }
