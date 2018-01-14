@@ -18,15 +18,21 @@ const socket = require('./sockets');
 
 socket(io);
 
+console.log('You\'re in: ', process.env.NODE_ENV);
+
 const DIST_DIR = path.join(__dirname, '../dist');
 const BUNDLE = path.join(__dirname, '../dist/bundle');
 const CLIENT_DIR = path.join(__dirname, '../src/');
 
-const CLIENT_SECRET = global.CLIENT_SECRET ? global.CLIENT_SECRET : require('../secrets').FACEBOOK_CLIENT_SECRET; // eslint-disable-line
+const CLIENT_SECRET = global.CLIENT_SECRET ? global.CLIENT_SECRET : require('../secrets').FACEBOOK_APP_SECRET; // eslint-disable-line
+const CLIENT_ID = global.CLIENT_ID ? global.CLIENT_ID : require('../secrets').FACEBOOK_APP_ID; // eslint-disable-line
 
-const port = process.env.PORT || 3001;
+console.log('clientID: ', CLIENT_ID);
+
+
+const PORT = process.env.PORT || 3000;
 const APP_DOMAIN = process.env.DOMAIN || 'http://localhost';
-const host = `${APP_DOMAIN}:${port}`;
+const HOST = `${APP_DOMAIN}:${PORT}`;
 
 const sessionStoreOptions = {
   checkExpirationInterval: 1000 * 60 * 15, // Every 15 minutes
@@ -80,9 +86,9 @@ passport.deserializeUser((facebookId, done) => {
 });
 
 passport.use(new FacebookStrategy({
-  clientID: '158163551574274',
+  clientID: CLIENT_ID,
   clientSecret: CLIENT_SECRET,
-  callbackURL: `${host}/auth/facebook/callback`,
+  callbackURL: `${HOST}/auth/facebook/callback`,
   profileFields: ['first_name', 'last_name', 'email', 'picture.type(large)'],
   enableProof: true,
 }, (accessToken, refreshToken, profile, done) => {
@@ -223,6 +229,6 @@ app.get('*', (req, res) => {
 
 /* --------- Server Initialization ---------- */
 
-http.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+http.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
 });

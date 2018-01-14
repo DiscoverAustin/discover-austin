@@ -6,9 +6,9 @@
   "scripts": {
     "test": "./test/run.sh",
     "build": "webpack --watch",
-    "start": "node server",
+    "start": "NODE_ENV=production node server",
     "db": "mysql -u root < schema.sql",
-    "dev-start": "npm run db && npm start",
+    "dev-start": "npm run db && NODE_ENV=development nodemon server",
     "lint": "./node_modules/.bin/eslint .",
     "heroku-postbuild": "webpack -p --progress"
   },
