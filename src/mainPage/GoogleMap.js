@@ -1,13 +1,13 @@
 // import React from 'react';
-// import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
-// import { GOOGLE_MAPS_API_KEY as apiKey } from '../../secrets';
+// import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 //
-// export class MapContainer extends React.Component {
-//   render () {
-//     return (
+// const MyMap = withScriptjs(withGoogleMap((props) => (
+//   <GoogleMap
+//    defaultZoom={8}
+//    defaultCenter={{ lat: -34.397, lng: 150.644 }}
+//  >
+//    {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} />}
+//  </GoogleMap>
+// )))
 //
-//     )
-//   }
-// }
-//
-// export default GoogleApiWrapper({ apiKey })(MapContainer);
+// export default MyMap;

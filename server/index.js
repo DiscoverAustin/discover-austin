@@ -24,7 +24,7 @@ const CLIENT_DIR = path.join(__dirname, '../src/');
 
 const CLIENT_SECRET = global.CLIENT_SECRET ? global.CLIENT_SECRET : require('../secrets').FACEBOOK_CLIENT_SECRET; // eslint-disable-line
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 const APP_DOMAIN = process.env.DOMAIN || 'http://localhost';
 const host = `${APP_DOMAIN}:${port}`;
 

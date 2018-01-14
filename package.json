@@ -6,10 +6,11 @@
   "scripts": {
     "test": "./test/run.sh",
     "build": "webpack --watch",
-    "start": "nodemon server",
+    "start": "node server",
     "db": "mysql -u root < schema.sql",
     "dev-start": "npm run db && npm start",
-    "lint": "./node_modules/.bin/eslint ."
+    "lint": "./node_modules/.bin/eslint .",
+    "heroku-postbuild": "webpack -p --progress"
   },
   "repository": {
     "type": "git",
@@ -48,6 +49,7 @@
     "react": "^16.2.0",
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.2.0",
+    "react-google-maps": "^9.4.5",
     "react-leaflet": "^1.7.8",
     "react-router-dom": "^4.2.2",
     "socket.io": "^2.0.4",
