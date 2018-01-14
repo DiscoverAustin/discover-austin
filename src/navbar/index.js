@@ -5,7 +5,10 @@ import axios from 'axios';
 export default class Navbar extends Component {
   constructor() {
     super();
-    this.state = { showMenu: false };
+    this.state = {
+      showMenu: false,
+      weather: {},
+    };
   }
 
   toggleMenu = () => {
@@ -33,11 +36,11 @@ export default class Navbar extends Component {
       {
         this.state.showMenu &&
         <div className="menu">
-          <Link to="/"><div className="option" id="link1">Home</div></Link>
-          <Link to="/profile"><div className="option">Profile</div></Link>
-          <Link to="/leaderboard"><div className="option">Leaderboard</div></Link>
-          <Link to="/challenges"><div className="option">Challenges</div></Link>
-          <a href="/" onClick={ this.handleLogout }><div className="option" id="link3">Logout</div></a>
+          <Link to="/" onClick={this.toggleMenu}><div className="option sidebar-home-color" id="link1">Home</div></Link>
+          <Link to="/profile" onClick={this.toggleMenu}><div className="option sidebar-profile-color">Profile</div></Link>
+          <Link to="/leaderboard" onClick={this.toggleMenu}><div className="option sidebar-leaderboard-color">Leaderboard</div></Link>
+          <Link to="/challenges" onClick={this.toggleMenu}><div className="option sidebar-challenges-color">Challenges</div></Link>
+          <a href="/" onClick={this.handleLogout}><div className="option sidebar-logout-color" id="link3">Logout</div></a>
         </div>
       }
     </div>

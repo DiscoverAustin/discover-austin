@@ -99,6 +99,7 @@ passport.use(new FacebookStrategy({
   };
   db.findOrCreateUser(userInfo)
     .then((result) => {
+      console.log('result!; ', result);
       done(null, result);
     })
     .catch((e) => { console.error(e); });
@@ -109,19 +110,13 @@ passport.use(new FacebookStrategy({
 
 app.get('/', (req, res) => {
   if (!req.isAuthenticated()) {
+    console.log('hit');
     res.sendFile(path.join(DIST_DIR, 'login.html'));
   } else {
+    console.log('hit2');
     res.sendFile(path.join(DIST_DIR, 'index.html'));
   }
 });
-
-app.get('/auth/facebook', passport.authenticate(
-  'facebook',
-  {
-    authType: 'rerequest',
-    scope: ['email', 'public_profile'],
-  },
-));
 
 app.get('/auth/facebook/callback', passport.authenticate(
   'facebook',
@@ -131,7 +126,17 @@ app.get('/auth/facebook/callback', passport.authenticate(
   },
 ));
 
+app.get('/auth/facebook', passport.authenticate(
+  'facebook',
+  {
+    authType: 'rerequest',
+    scope: ['email', 'public_profile'],
+  },
+));
+
 // Authentication check for all subsequent routes
+
+/* --------- API Routes ---------- */
 app.get('*', (req, res, next) => {
   if (!req.isAuthenticated()) {
     res.redirect('/');
@@ -144,40 +149,18 @@ app.get('*', (req, res, next) => {
 /* --------- API Routes ---------- */
 
 app.get('/api/leaderboard', (req, res) => {
-  const leaders = [
-    {
-      name: 'Bob',
-      score: 1,
-    }, {
-      name: 'Bobby',
-      score: 2,
-    }, {
-      name: 'Rob',
-      score: 10,
-    }, {
-      name: 'Robert',
-      score: 12,
-    }, {
-      name: 'Bobbina',
-      score: 14,
-    }, {
-      name: 'Bobber',
-      score: 119,
-    }, {
-      name: 'Billy Bob',
-      score: 205,
-    }, {
-      name: 'Bob the Builder',
-      score: 1000,
-    },
-  ].sort((a, b) => b.score - a.score);
-  const stringifiedLeaders = JSON.stringify(leaders);
-  res.send(stringifiedLeaders).status(201).end();
+  db.getLeaderboard()
+    .then((leaders) => {
+      res.send(JSON.stringify(leaders)).status(201).end();
+    });
 });
 
 app.get('/api/getUserInfo', (req, res) => {
-  const { id } = req.body;
-  db.getUserInfo(id)
+  let { facebookId } = req.query;
+  if (!req.query.facebookId) {
+    facebookId = req.user[0].facebook_id;
+  }
+  db.getUserInfo(facebookId)
     .then((user) => { res.send(user); })
     .catch((e) => { console.error(e); });
 });
@@ -188,9 +171,35 @@ app.get('/api/getAllUsers', (req, res) => {
     .catch((e) => { console.error(e); });
 });
 
+app.get('/api/getUserAchievements', (req, res) => {
+  let { facebookId } = req.query;
+  if (!req.query.facebookId) {
+    facebookId = req.user[0].facebook_id;
+  }
+  db.getUserAchievements(facebookId)
+    .then((achievements) => {
+      const achievArray = [];
+      achievements.map(elem => achievArray.push(elem.description));
+      res.send(achievArray);
+    })
+    .catch((e) => { console.error(e); });
+});
+
+app.get('/api/getAllAchievements', (req, res) => {
+  db.getAllAchievements()
+    .then((achievements) => { res.send(achievements); })
+    .catch((e) => { console.error(e); });
+});
+
 app.get('/api/isLoggedIn', (req, res) => {
   const isLoggedIn = req.isAuthenticated();
   res.send({ isLoggedIn }).end();
+});
+
+app.get('/api/feed', (req, res) => {
+  db.getFeed()
+    .then((feed) => { res.send(feed); })
+    .catch((e) => { console.error(e); });
 });
 
 app.post('/api/logout', (req, res) => {

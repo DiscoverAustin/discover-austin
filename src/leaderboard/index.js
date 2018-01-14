@@ -17,13 +17,13 @@ export default class Leaderboard extends Component {
   }
 
   render = () => (
-    <div>
-      <h1 className="pagetitle">Leaderboard</h1>
-      {
-        this.state.leaders.map((leader, index) => (
+    <div className="component-container">
+      <div className="leaderboard-wrapper">
+        <h1 className="pagetitle">Leaderboard</h1>
+        {this.state.leaders.map((leader, index) => (
           <Leaders leader={leader} index={index} key={index} />
-        ))
-      }
+        ))}
+      </div>
     </div>
   )
 }

@@ -1,34 +1,28 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-export default class Leaderboard extends Component {
+export default class Profile extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      leaders: [
-        { name: 'Mario', points: 1250 },
-        { name: 'Luigi', points: 975 },
-        { name: 'Princess Peach', points: 825 },
-        { name: 'Yoshi', points: 600 },
-        { name: 'Bowser', points: 400 },
-        { name: 'Wario', points: 250 },
-      ],
-    };
+    this.state = { user: this.props.user };
   }
 
   componentDidMount = () => {
-    const param = window.location.pathname;
-    console.log(param);
-    axios.get('http://localhost:3000/api/getUserInfo', param).then((res) => { console.log(res); });
+    const param = window.location.pathname.split('/')[2];
+    axios.get('http://localhost:3000/api/getUserInfo', { params: { facebookId: param } })
+      .then((res) => {
+        this.setState({ user: res.data[0] });
+      })
+      .catch((e) => { console.log(e); });
   }
 
-  render = () => (
-    <div>
-      <div className="prof">
-        <img className="profImage" src="https://images.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.warstore.co.uk%2Fekmps%2Fshops%2Fmarlina%2Fimages%2Fplain-blue-3-x-2-flag-2482-p.jpg&f=1"/>
-        <h2> Nathan Chackerian </h2>
-        <h2> <span className="score">2343</span> points</h2>
-      </div>
-    </div>
-  )
+   render = () => (
+     <div className='component-container'>
+       <div className="prof">
+         <img className="profImage" src={ this.state.user.picture_url }/>
+         <h2> { this.state.user.first_name } { this.state.user.last_name } </h2>
+         <h2> <span className="score">{ this.state.user.total_points }</span> points</h2>
+       </div>
+     </div>
+   )
 }

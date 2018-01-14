@@ -18,9 +18,9 @@ const getAllUsers = () => (
     })
 );
 
-const getUserInfo = id => (
+const getUserInfo = facebookId => (
   connection
-    .then(db => db.query(`SELECT * FROM users WHERE id = ${id}`))
+    .then(db => db.query(`SELECT * FROM users WHERE facebook_id = ${facebookId}`))
     .catch((e) => {
       console.error('Error retreiving from database!: ', e);
       throw (e);
@@ -32,10 +32,10 @@ const getUserByFacebookId = facebookId => (
     .then(db => db.query(`SELECT * FROM users WHERE facebook_id = ${facebookId}`))
 );
 
-const getUserAchievements = id => (
+const getUserAchievements = facebookId => (
   connection
     .then(db => db.query(`SELECT * FROM achievements a, users_achievements ua, users u
-                          WHERE u.id = ${id} AND a.id = ua.achievement_id AND u.id = ua.user_id`))
+                          WHERE u.facebook_id = ${facebookId} AND a.id = ua.achievement_id AND u.id = ua.user_id`))
     .catch((e) => {
       console.error('Error retreiving from database!: ', e);
       throw (e);
@@ -69,7 +69,7 @@ const findOrCreateUser = userInfo => (
 
 const getLeaderboard = () => (
   connection
-    .then(db => db.query('SELECT name, total_points FROM users ORDER BY total_points DESC LIMIT 10'))
+    .then(db => db.query('SELECT first_name, last_name, facebook_id, total_points FROM users ORDER BY total_points DESC LIMIT 10'))
     .catch((e) => {
       console.error('Error retreiving from database!: ', e);
       throw (e);
