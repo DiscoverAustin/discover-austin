@@ -22,15 +22,15 @@ const DIST_DIR = path.join(__dirname, '../dist');
 const BUNDLE = path.join(__dirname, '../dist/bundle');
 const CLIENT_DIR = path.join(__dirname, '../src/');
 
-const CLIENT_SECRET = global.CLIENT_SECRET ? global.CLIENT_SECRET : require('./secrets/secrets.js'); // eslint-disable-line
+const CLIENT_SECRET = global.CLIENT_SECRET ? global.CLIENT_SECRET : require('../secrets').FACEBOOK_CLIENT_SECRET; // eslint-disable-line
 
 const port = process.env.PORT || 3000;
 const APP_DOMAIN = process.env.DOMAIN || 'http://localhost';
 const host = `${APP_DOMAIN}:${port}`;
 
 const sessionStoreOptions = {
-  checkExpirationInterval: 1000 * 5, // Every 15 minutes
-  expiration: 1000 * 60 * 60 * 48, // Every 24 hours
+  checkExpirationInterval: 1000 * 60 * 15, // Every 15 minutes
+  expiration: 1000 * 60 * 60 * 48, // Every 48 hours
   createDatabaseTable: true,
   schema: {
     tableName: 'Sessions',
@@ -61,6 +61,9 @@ app.use(bodyParser.json());
 app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+/* --------- Passport/Facebook Authentication Setup ---------- */
 
 passport.serializeUser((user, done) => {
   done(null, user.facebook_id);
@@ -96,20 +99,25 @@ passport.use(new FacebookStrategy({
   };
   db.findOrCreateUser(userInfo)
     .then((result) => {
+      console.log('result!; ', result);
       done(null, result);
     })
     .catch((e) => { console.error(e); });
 }));
 
+
 /* --------- GET Handlers ---------- */
 
 app.get('/', (req, res) => {
   if (!req.isAuthenticated()) {
+    console.log('hit');
     res.sendFile(path.join(DIST_DIR, 'login.html'));
   } else {
+    console.log('hit2');
     res.sendFile(path.join(DIST_DIR, 'index.html'));
   }
 });
+
 app.get('/auth/facebook/callback', passport.authenticate(
   'facebook',
   {
@@ -136,6 +144,9 @@ app.get('*', (req, res, next) => {
     next();
   }
 });
+
+
+/* --------- API Routes ---------- */
 
 app.get('/api/leaderboard', (req, res) => {
   db.getLeaderboard()
@@ -198,8 +209,9 @@ app.post('/api/logout', (req, res) => {
   res.sendFile(path.join(DIST_DIR, 'login.html'));
 });
 
+
 /* --------- Default Fallback Route ---------- */
-// Default route fallback allows React Router to handle all other routing
+
 app.get('*', (req, res) => {
   if (!req.isAuthenticated()) {
     res.sendFile(path.join(DIST_DIR, 'login.html'));
@@ -207,6 +219,9 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(DIST_DIR, 'index.html'));
   }
 });
+
+
+/* --------- Server Initialization ---------- */
 
 http.listen(port, () => {
   console.log(`Listening on port ${port}`);

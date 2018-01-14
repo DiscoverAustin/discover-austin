@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 
-export default class Challenges extends React.Component {
+export default class Challenges extends Component {
   constructor() {
     super();
     this.state = {
@@ -9,7 +9,19 @@ export default class Challenges extends React.Component {
       challenges: [],
       achievements: [],
     };
-    this.toggleMenu = this.toggleMenu.bind(this);
+  }
+
+  componentDidMount = () => {
+    axios.get('http://localhost:3000/api/getAllAchievements')
+      .then((res) => {
+        this.setState({ challenges: res.data });
+      })
+      .catch((e) => { console.log(e); });
+    axios.get('http://localhost:3000/api/getUserAchievements')
+      .then((res) => {
+        this.setState({ achievements: res.data });
+      })
+      .catch((e) => { console.log(e); });
   }
 
   componentDidMount = () => {
@@ -30,7 +42,7 @@ export default class Challenges extends React.Component {
     window.scroll(0, 0);
   }
 
-  filterChallenges(challenge, index) {
+  filterChallenges = (challenge, index) => {
     if (this.state.query === 'completed') {
       if (this.state.achievements.includes(challenge.description)) {
         return (
@@ -91,17 +103,15 @@ export default class Challenges extends React.Component {
     );
   }
 
-  toggleMenu() {
-    this.setState({ showMenu: !this.state.showMenu });
-  }
-
   render = () => (
     <div className="component-container">
       <h1 className="pagetitle">Challenges</h1>
       <div className="challengescontainer">
-        {this.state.challenges.map((challenge, index) => (
-          this.filterChallenges(challenge, index)
-          ))}
+        {
+          this.state.challenges.map((challenge, index) => (
+            this.filterChallenges(challenge, index)
+          ))
+        }
       </div>
       <footer className="challenges-footer">
         <ul>
