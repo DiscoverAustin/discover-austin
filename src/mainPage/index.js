@@ -1,10 +1,11 @@
-import React from 'react';
+
+import React, { Component } from 'react';
 import axios from 'axios';
 import MapPage from './Map';
 import Feed from './Feed';
 
 
-export default class MainPage extends React.Component {
+export default class MainPage extends Component {
   constructor() {
     super();
     this.state = { feed: [] };
@@ -21,7 +22,7 @@ export default class MainPage extends React.Component {
   render = () => (
     <div className="component-container">
       <MapPage />
-      <Feed feed={this.state.feed} />
+      <Feed feed={ this.state.feed } />
     </div>
   )
 }

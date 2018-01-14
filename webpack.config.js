@@ -5,14 +5,17 @@ const CLIENT_DIR = path.join(__dirname, 'src');
 
 module.exports = {
   context: CLIENT_DIR,
+  
   entry: {
     app: './app',
     login: './login',
   },
+
   output: {
     path: `${DIST_DIR}/bundle`,
     filename: '[name].bundle.js',
   },
+
   module: {
     rules: [{
       loader: 'babel-loader',
@@ -25,6 +28,7 @@ module.exports = {
   },
 
   devtool: 'cheap-module-eval-source-map',
+
   devServer: {
     contentBase: DIST_DIR,
   },
