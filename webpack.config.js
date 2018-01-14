@@ -21,7 +21,11 @@ module.exports = {
     }, {
       loader: 'css-loader',
       test: /\.css/,
-    }],
+    }, {
+      test: /\.(png|jpg|gif)$/,
+      loader: 'file-loader',
+      include: DIST_DIR
+    }]
   },
 
   devtool: 'cheap-module-eval-source-map',
