@@ -132,7 +132,7 @@ splash-main-container {
 
 .splash-instructions-wrapper {
   display: inline-block;
-  padding-top: 110px;
+  padding-top: 120px;
   width: 50%;
 }
 
@@ -143,6 +143,7 @@ splash-main-container {
 
 .splash-instructions-wrapper h1 {
   text-align: center;
+  margin-bottom: 30px;
 }
 
 .splash-rules img {
