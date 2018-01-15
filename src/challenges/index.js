@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Challenge from './Challenge';
 
 export default class Challenges extends Component {
   constructor() {
@@ -45,53 +46,17 @@ export default class Challenges extends Component {
   filterChallenges = (challenge, index) => {
     if (this.state.query === 'completed') {
       if (this.state.achievements.includes(challenge.description)) {
-        return (
-          <div className="challengebox" key={index} >
-            <div className="back">
-              <a href={challenge.yelp_url} target="_blank">
-                <h3>{challenge.description}</h3>
-                <h2>{challenge.points}</h2>
-              </a>
-            </div>
-            <div className="front">
-              <img src={challenge.image} />
-            </div>
-          </div>
-        );
+        return <Challenge challenge={challenge} key={index} />;
       }
       return null;
     } else if (this.state.query === 'todo') {
       if (!this.state.achievements.includes(challenge.description)) {
-        return (
-          <div className="challengebox" key={index} >
-            <div className="back">
-              <a href={challenge.yelp_url} target="_blank">
-                <h3>{challenge.description}</h3>
-                <h2>{challenge.points}</h2>
-              </a>
-            </div>
-            <div className="front">
-              <img src={challenge.image} />
-            </div>
-          </div>
-        );
+        return <Challenge challenge={challenge} key={index} />;
       }
       return null;
     }
     if (!this.state.achievements.includes(challenge.description)) {
-      return (
-        <div className="challengebox" key={index} >
-          <div className="back">
-            <a href={challenge.yelp_url} target="_blank">
-              <h3>{challenge.description}</h3>
-              <h2>{challenge.points}</h2>
-            </a>
-          </div>
-          <div className="front">
-            <img src={challenge.image} />
-          </div>
-        </div>
-      );
+      return <Challenge challenge={challenge} key={index} />;
     }
     return (
       <div className="challengebox challenge-completed" key={index} >

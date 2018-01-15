@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SplashContent from './SplashContent';
 
+
 export default class SplashContainer extends Component {
   constructor() {
     super();
