@@ -46,13 +46,10 @@ export default class Challenges extends Component {
     if (!this.state.achievements.includes(challenge.description)) {
       return <Challenge challenge={challenge} key={index} />;
     }
+    const cloneOfChallenge = JSON.parse(JSON.stringify(challenge));
+    cloneOfChallenge.image = 'https://vignette.wikia.nocookie.net/nickfanon/images/d/da/Award_trophy.png/revision/latest?cb=20140723181303';
     return (
-      <div className="challengebox challenge-completed" key={index} >
-        <a href={challenge.yelp_url} target="_blank">
-          <h3>{challenge.description}</h3>
-          <h2>{challenge.points}</h2>
-        </a>
-      </div>
+      <Challenge challenge={cloneOfChallenge} key={index} />
     );
   }
 
