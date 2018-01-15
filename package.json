@@ -6,7 +6,7 @@
   "scripts": {
     "test": "./test/run.sh",
     "build": "webpack --watch",
-    "start": "npm run db && NODE_ENV=production node server",
+    "start": "mysql --host=us-cdbr-iron-east-05.cleardb.net --user=bc33747568837f --password=e81c2286 --reconnect heroku_4df7e9229521329 < schema.sql && NODE_ENV=production node server",
     "db": "mysql -u root < schema.sql",
     "dev-start": "npm run db && NODE_ENV=development nodemon server",
     "lint": "./node_modules/.bin/eslint .",
