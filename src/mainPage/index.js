@@ -22,8 +22,9 @@ export default class MainPage extends Component {
   render = () => (
     <div className="component-container">
       <div style={{
-          width: '400px',
+          width: '80%',
           height: '400px',
+          margin: '0px auto',
         }}>
         <GoogleMap />
       </div>
