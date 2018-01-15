@@ -22,14 +22,11 @@ const DIST_DIR = path.join(__dirname, '../dist');
 const BUNDLE = path.join(__dirname, '../dist/bundle');
 const CLIENT_DIR = path.join(__dirname, '../src/');
 
-const CLIENT_SECRET = global.CLIENT_SECRET ? global.CLIENT_SECRET : require('../secrets').FACEBOOK_APP_SECRET; // eslint-disable-line
-const CLIENT_ID = global.CLIENT_ID ? global.CLIENT_ID : require('../secrets').FACEBOOK_APP_ID; // eslint-disable-line
+const CLIENT_SECRET = global.CLIENT_SECRET ? global.CLIENT_SECRET : require('../secrets').FACEBOOK_APP_SECRET // eslint-disable-line
 
-let isAuthenticated = false;
-
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 const APP_DOMAIN = process.env.DOMAIN || 'http://localhost';
-const HOST = `${APP_DOMAIN}:${PORT}`;
+const host = `${APP_DOMAIN}:${port}`;
 
 const sessionStoreOptions = {
   checkExpirationInterval: 1000 * 60 * 15, // Every 15 minutes
@@ -83,9 +80,9 @@ passport.deserializeUser((facebookId, done) => {
 });
 
 passport.use(new FacebookStrategy({
-  clientID: CLIENT_ID,
+  clientID: '158163551574274',
   clientSecret: CLIENT_SECRET,
-  callbackURL: `${HOST}/auth/facebook/callback`,
+  callbackURL: `${host}/auth/facebook/callback`,
   profileFields: ['first_name', 'last_name', 'email', 'picture.type(large)'],
   enableProof: true,
 }, (accessToken, refreshToken, profile, done) => {
@@ -102,6 +99,7 @@ passport.use(new FacebookStrategy({
   };
   db.findOrCreateUser(userInfo)
     .then((result) => {
+      console.log('result!; ', result);
       done(null, result);
     })
     .catch((e) => { console.error(e); });
@@ -111,23 +109,22 @@ passport.use(new FacebookStrategy({
 /* --------- GET Handlers ---------- */
 
 app.get('/', (req, res) => {
-  if (isAuthenticated) {
-    isAuthenticated = false;
-    res.sendFile(path.join(DIST_DIR, 'index.html'));
-  } else if (!req.isAuthenticated()) {
+  if (!req.isAuthenticated()) {
+    console.log('hit');
     res.sendFile(path.join(DIST_DIR, 'login.html'));
   } else {
+    console.log('hit2');
     res.sendFile(path.join(DIST_DIR, 'index.html'));
   }
 });
 
 app.get('/auth/facebook/callback', passport.authenticate(
   'facebook',
-  { failureRedirect: '/' },
-), (req, res) => {
-  isAuthenticated = true;
-  res.redirect('/');
-});
+  {
+    failureRedirect: '/',
+    successRedirect: '/',
+  },
+));
 
 app.get('/auth/facebook', passport.authenticate(
   'facebook',
@@ -205,6 +202,16 @@ app.get('/api/feed', (req, res) => {
     .catch((e) => { console.error(e); });
 });
 
+app.get('/api/getUserFeed', (req, res) => {
+  let { facebookId } = req.query;
+  if (!req.query.facebookId) {
+    facebookId = req.user[0].facebook_id;
+  }
+  db.getUserFeed(facebookId)
+    .then((feed) => { res.send(feed); })
+    .catch((e) => { console.error(e); });
+});
+
 app.post('/api/logout', (req, res) => {
   req.session.cookie.maxAge = 0;
   req.logout();
@@ -226,7 +233,6 @@ app.get('*', (req, res) => {
 
 /* --------- Server Initialization ---------- */
 
-console.log('NODE_ENV: ', process.env.NODE_ENV);
-http.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
+http.listen(port, () => {
+  console.log(`Listening on port ${port}`);
 });

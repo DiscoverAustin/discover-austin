@@ -12,18 +12,6 @@ export default class Challenges extends Component {
     };
   }
 
-  componentDidMount = () => {
-    axios.get('http://localhost:3000/api/getAllAchievements')
-      .then((res) => {
-        this.setState({ challenges: res.data });
-      })
-      .catch((e) => { console.log(e); });
-    axios.get('http://localhost:3000/api/getUserAchievements')
-      .then((res) => {
-        this.setState({ achievements: res.data });
-      })
-      .catch((e) => { console.log(e); });
-  }
 
   componentDidMount = () => {
     axios.get('http://localhost:3000/api/getAllAchievements')
