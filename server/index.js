@@ -18,8 +18,6 @@ const socket = require('./sockets');
 
 socket(io);
 
-console.log('You\'re in: ', process.env.NODE_ENV);
-
 const DIST_DIR = path.join(__dirname, '../dist');
 const BUNDLE = path.join(__dirname, '../dist/bundle');
 const CLIENT_DIR = path.join(__dirname, '../src/');
@@ -27,8 +25,7 @@ const CLIENT_DIR = path.join(__dirname, '../src/');
 const CLIENT_SECRET = global.CLIENT_SECRET ? global.CLIENT_SECRET : require('../secrets').FACEBOOK_APP_SECRET; // eslint-disable-line
 const CLIENT_ID = global.CLIENT_ID ? global.CLIENT_ID : require('../secrets').FACEBOOK_APP_ID; // eslint-disable-line
 
-console.log('clientID: ', CLIENT_ID);
-
+let isAuthenticated = false;
 
 const PORT = process.env.PORT || 3000;
 const APP_DOMAIN = process.env.DOMAIN || 'http://localhost';
@@ -64,73 +61,71 @@ app.use(express.static(BUNDLE));
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json());
-// app.use(session(sessionOptions));
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(session(sessionOptions));
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 /* --------- Passport/Facebook Authentication Setup ---------- */
 
-// passport.serializeUser((user, done) => {
-//   done(null, user.facebook_id);
-// });
-//
-// passport.deserializeUser((facebookId, done) => {
-//   db.getUserByFacebookId(facebookId)
-//     .then((foundUser) => {
-//       done(null, foundUser);
-//     })
-//     .catch((e) => {
-//       console.error('Error deserializing user!: ', e);
-//     });
-// });
-//
-// passport.use(new FacebookStrategy({
-//   clientID: CLIENT_ID,
-//   clientSecret: CLIENT_SECRET,
-//   callbackURL: `${HOST}/auth/facebook/callback`,
-//   profileFields: ['first_name', 'last_name', 'email', 'picture.type(large)'],
-//   enableProof: true,
-// }, (accessToken, refreshToken, profile, done) => {
-//   const facebookId = profile.id;
-//   const { familyName: lastName, givenName: firstName } = profile.name;
-//   const email = profile.emails[0].value;
-//   const pictureUrl = profile.photos[0].value;
-//   const userInfo = {
-//     firstName,
-//     lastName,
-//     email,
-//     facebookId,
-//     pictureUrl,
-//   };
-//   db.findOrCreateUser(userInfo)
-//     .then((result) => {
-//       console.log('result!; ', result);
-//       done(null, result);
-//     })
-//     .catch((e) => { console.error(e); });
-// }));
+passport.serializeUser((user, done) => {
+  done(null, user.facebook_id);
+});
+
+passport.deserializeUser((facebookId, done) => {
+  db.getUserByFacebookId(facebookId)
+    .then((foundUser) => {
+      done(null, foundUser);
+    })
+    .catch((e) => {
+      console.error('Error deserializing user!: ', e);
+    });
+});
+
+passport.use(new FacebookStrategy({
+  clientID: CLIENT_ID,
+  clientSecret: CLIENT_SECRET,
+  callbackURL: `${HOST}/auth/facebook/callback`,
+  profileFields: ['first_name', 'last_name', 'email', 'picture.type(large)'],
+  enableProof: true,
+}, (accessToken, refreshToken, profile, done) => {
+  const facebookId = profile.id;
+  const { familyName: lastName, givenName: firstName } = profile.name;
+  const email = profile.emails[0].value;
+  const pictureUrl = profile.photos[0].value;
+  const userInfo = {
+    firstName,
+    lastName,
+    email,
+    facebookId,
+    pictureUrl,
+  };
+  db.findOrCreateUser(userInfo)
+    .then((result) => {
+      done(null, result);
+    })
+    .catch((e) => { console.error(e); });
+}));
 
 
 /* --------- GET Handlers ---------- */
 
 app.get('/', (req, res) => {
-  // if (!req.isAuthenticated()) {
-  //   console.log('hit');
-  //   res.sendFile(path.join(DIST_DIR, 'login.html'));
-  // } else {
-  //   console.log('hit2');
+  if (req.isAuthenticated() || isAuthenticated) {
+    isAuthenticated = false;
     res.sendFile(path.join(DIST_DIR, 'index.html'));
-  // }
+  } else {
+    res.sendFile(path.join(DIST_DIR, 'login.html'));
+  }
 });
 
 app.get('/auth/facebook/callback', passport.authenticate(
   'facebook',
-  {
-    failureRedirect: '/',
-    successRedirect: '/',
-  },
-));
+  { failureRedirect: '/' },
+), (req, res) => {
+  isAuthenticated = true;
+  res.redirect('/');
+});
 
 app.get('/auth/facebook', passport.authenticate(
   'facebook',
@@ -229,6 +224,7 @@ app.get('*', (req, res) => {
 
 /* --------- Server Initialization ---------- */
 
+console.log('NODE_ENV: ', process.env.NODE_ENV);
 http.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });

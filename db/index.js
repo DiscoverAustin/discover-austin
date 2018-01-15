@@ -2,7 +2,6 @@ const mysql = require('promise-mysql');
 const mysqlConfig = require('./config.js');
 const mysql2 = require('mysql');
 
-console.log('mysqlConfig: ', mysqlConfig);
 const connection = mysql.createConnection(mysqlConfig)
   .catch(e => console.error('Error connecting to mysql database!: ', e.stack));
 
