@@ -4,17 +4,17 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-/*  align-content: space-around;*/
+  margin-bottom: 100px;
 }
 
 .challengebox {
   background: lightblue;
-  display: inline-block;
   border: 4px solid black;
   width: 30%;
   height: 140px;
   margin-bottom: 80px;
   cursor: pointer;
+  position: relative;
 }
 
 .challengebox h3, h2 {
@@ -31,6 +31,34 @@
   filter: alpha(opacity=40);
 }
 
+.front {
+  width: 100%;
+  height: 140px;
+  -webkit-transform: perspective(600px) rotateY(0deg);
+  transform: perspective(600px) rotateY(0deg);
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+  transition: -webkit-transform .5s linear 0s;
+  transition: transform .5s linear 0s;
+}
+
+.front img {
+  width: 100%;
+  height: 132px;
+}
+
+.back {
+  position: absolute;
+  width: 100%;
+  height: 132px;
+  background: silver;
+   -webkit-transform: perspective(600px) rotateY(180deg);
+  transform: perspective(600px) rotateY(180deg);
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+  transition: -webkit-transform .5s linear 0s;
+  transition: transform .5s linear 0s;
+}
 
 .challengebox:hover > .front {
   -webkit-transform: perspective(600px) rotateY(-180deg);
