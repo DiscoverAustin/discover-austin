@@ -1,8 +1,9 @@
 
 import React, { Component } from 'react';
 import axios from 'axios';
-import MapPage from './Map';
+// import MapPage from './Map';
 import Feed from './Feed';
+// import GoogleMap from './GoogleMap';
 
 
 export default class MainPage extends Component {
@@ -12,7 +13,7 @@ export default class MainPage extends Component {
   }
 
   componentWillMount = () => {
-    axios.get('http://localhost:3000/api/feed')
+    axios.get('/api/feed')
       .then((res) => {
         this.setState({ feed: res.data });
       })
@@ -21,8 +22,11 @@ export default class MainPage extends Component {
 
   render = () => (
     <div className="component-container">
-      <MapPage />
       <Feed feed={ this.state.feed } />
     </div>
   )
 }
+
+
+// <GoogleMap isMarkerShown/>
+// <MapPage />
