@@ -1,5 +1,8 @@
 
 @import url('./leaflet.css');
+@import url('./splashPage.css');
+@import url('./leaderboard.css');
+@import url('./challenges.css');
 
 /* Media queries in splash section and bottom of the page */
 
@@ -53,6 +56,7 @@ a, a:visited, a:hover, a:active {
   background: #fff;
   position: fixed;
   z-index: 3;
+  padding: 0 !important;
 }
 
 .leaflet-container {
@@ -96,7 +100,7 @@ a, a:visited, a:hover, a:active {
   /*margin-top: -20px;*/
   margin-top: 61px;
   width: 100%;
-  position: absolute;
+  position: fixed;
   z-index: 2;
   display: none;
 }
@@ -371,433 +375,27 @@ a, a:visited, a:hover, a:active {
   color: red;
 }
 
-/* --------------------------------- */
-/* ------ end of Leaderboard ------- */
-/* --------------------------------- */
 
-/* --------------------------------- */
-/* ------- Splash page ------------- */
-/* --------------------------------- */
-
-.splash-main-container {
-  background: #fff;
-  font-family: Helvetica, Arial, sans-serif;
+.profImage {
+ border-radius: 100%;
+ border: 3px solid black;
+ height: 200px;
+ width: 200px;
+ display: block;
+ margin: 0 auto;
 }
 
-.navbar-wrapper {
-  display: none;
+a, a:visited, a:hover, a:active {
+  text-decoration: none !important;
+  color: inherit !important;
 }
 
-.splash-top-bar {
-  background: #fff;
-  width: 100%;
-  height: 60px;
-  position: relative;
-}
+/*==========================
 
-.splash-top-bar ul {
-  list-style-type: none;
-  padding: 0;
-  width: 240px;
-  height: 60px;
-  float: right;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
+        Media Queries
 
-.splash-top-bar li {
-  display: inline-block;
-  padding: 18px 20px;
-  cursor: pointer;
-}
+===========================*/
 
-.splash-top-bar li:hover {
-  background: #f2f3f4;
-  border-bottom: 2px solid red;
-}
-
-.splash-top-bar-title {
-  color: black;
-  font-size: 30px;
-  font-weight: bold;
-  width: 240px;
-  height: 60px;
-  position: absolute;
-  left: 200px;
-  top: 0;
-  line-height: 60px;
-}
-
-.splash-banner {
-  width: 100%;
-  position: relative;
-  background: black;
-}
-
-.splash-banner img {
-  width: 100%;
-  height: 600px;
-}
-
-.splash-banner div {
-  position: absolute;
-  left: 180px;
-  bottom: 0;
-  color: white;
-  font-family: Helvetica, Arial, sans-serif;
-  height: 250px;
-}
-
-.splash-banner h1 {
-  font-size: 50px;
-}
-
-.splash-banner h2 {
-  font-size: 25px;
-  margin-bottom: 25px;
-  text-align: left;
-}
-
-.splash-banner div a {
-  background: #db4c3f;
-  padding: 10px 20px;
-  margin: auto;
-}
-
-.splash-intro {
-  font-family: Helvetica, Arial, sans-serif;
-  padding: 100px 0;
-}
-
-.splash-intro h1 {
-  text-align: center;
-  font-size: 26px;
-  color: #666;
-}
-
-.splash-intro h2 {
-  font-size: 18px;
-  color: #828282;
-}
-
-.splash-icons-container {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-around;
-}
-
-.splash-icons-container img {
-  width: 100px;
-  height: 100px;
-}
-
-.ut-wrapper {
-  background: #bf5700;
-  border-radius: 100%;
-}
-
-.splash-rules {
-  background: #f4f4f4;
-}
-
-.splash-rules h1 {
-  font-size: 26px;
-  color: #666;
-}
-
-.splash-rules h3 {
-  font-size: 18px;
-  color: #828282;
-}
-
-.splash-instructions-wrapper {
-  display: inline-block;
-  padding-top: 110px;
-  width: 50%;
-}
-
-.splash-instructions-wrapper div {
-  width: 370px;
-  margin: auto;
-}
-
-.splash-instructions-wrapper h1 {
-  text-align: center;
-}
-
-.splash-rules img {
-  width: 50%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  vertical-align: top;
-}
-
-.splash-quotes {
-  padding: 80px 0 100px 0;
-}
-
-.splash-quotes div {
-  width: 100%;
-  text-align: center;
-}
-
-.splash-quotes img {
-  display: block;
-  margin: auto;
-}
-
-.splash-team {
-  background: #f4f4f4;
-  padding: 50px 0;
-}
-
-.splash-team h1 {
-  text-align: center;
-}
-
-.splash-team-people {
-  padding: 50px 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
-.splash-team-person {
-  padding-bottom: 40px;
-}
-
-.splash-team-person div {
-  width: 200px;
-  height: 200px;
-  position: relative;
-  border-radius: 50%;
-}
-
-.splash-team-person img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-}
-
-.splash-team-person h5 {
-  text-align: center;
-  font-size: 24px;
-}
-
-@media only screen and (max-width:1280px) {
-  .splash-instructions-wrapper {
-    padding-top: 30px;
-  }
-}
-
-@media only screen and (max-width:1150px) {
-  .splash-top-bar-title {
-    left: 150px;
-  }
-
-  .splash-banner img {
-    opacity: 0.5;
-  }
-
-  .splash-banner div {
-    bottom: 180px;
-    left: 50%;
-    margin-left: -133px;
-  }
-}
-
-@media only screen and (max-width:765px) {
-  .splash-top-bar-title {
-    left: 100px;
-  }
-
-  .splash-instructions-wrapper {
-    position: static;
-    width: 100%;
-    padding: 80px 0;
-  }
-
-  .splash-instructions-wrapper div {
-    width: 90%;
-    margin: auto;
-    padding: 0;
-  }
-
-  .splash-instructions-wrapper h1 {
-    text-align: center;
-  }
-
-  .splash-rules img {
-    position: static;
-    width: 100%;
-  }
-
-  .splash-quotes {
-    padding: 40px 0 80px 0;
-  }
-}
-
-@media only screen and (max-width:650px) {
-  .splash-top-bar ul {
-    display: none;
-  }
-
-  .splash-top-bar-title {
-    display: none;
-  }
-
-  .navbar-wrapper {
-    display: inline;
-  }
-}
-
-@media only screen and (max-width:480px) {
-  .splash-banner img {
-    opacity: 0.5;
-    height: 400px;
-  }
-
-  .splash-banner div {
-    bottom: 50px;
-  }
-
-  .splash-icons-container {
-    flex-wrap: wrap;
-  }
-
-  .splash-icons-container img {
-    width: 50px;
-    height: 50px;
-  }
-
-  .splash-quotes {
-    padding: 20px 0 80px 0;
-  }
-}
-
-@media only screen and (max-width:420px) {
-  .splash-team-people {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-}
-
-/* --------------------------------- */
-/* ---- end of Splash page --------- */
-/* --------------------------------- */
-
-/* --------------------------------- */
-/* ---------- Challenges ----------- */
-/* --------------------------------- */
-
-.challengescontainer {
-  margin: auto;
-  width: 85%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin-bottom: 100px;
-}
-
-.challengebox {
-  background: black;
-  border: 4px solid black;
-  width: 30%;
-  height: 140px;
-  margin-bottom: 80px;
-  cursor: pointer;
-  position: relative;
-}
-
-.challengebox h3, h2 {
-  text-align: center;
-}
-
-
-.challengebox h3:hover {
-  color: red;
-}
-
-.challenge-completed {
-  opacity: 0.4;
-  filter: alpha(opacity=40); /* For IE8 and earlier */
-}
-
-.front {
-  width: 100%;
-  height: 140px;
-  -webkit-transform: perspective(600px) rotateY(0deg);
-  transform: perspective(600px) rotateY(0deg);
-  -webkit-backface-visibility:hidden;
-  backface-visibility:hidden;
-  transition: -webkit-transform .5s linear 0s;
-  transition: transform .5s linear 0s;
-}
-
-.front img {
-  width: 100%;
-  height: 132px;
-}
-
-.back {
-  position: absolute;
-  width: 100%;
-  height: 132px;
-  background: silver;
-   -webkit-transform: perspective(600px) rotateY(180deg);
-  transform: perspective(600px) rotateY(180deg);
-  -webkit-backface-visibility:hidden;
-  backface-visibility:hidden;
-  transition: -webkit-transform .5s linear 0s;
-  transition: transform .5s linear 0s;
-}
-
-.challengebox:hover > .front {
-  -webkit-transform: perspective(600px) rotateY(-180deg);
-  transform: perspective(600px) rotateY(-180deg);
-}
-
-.challengebox:hover > .back {
-  -webkit-transform: perspective(600px) rotateY(0deg);
-  transform: perspective(600px) rotateY(0deg);
-}
-
-.challenges-footer {
-  position: fixed;
-  bottom: 10px;
-  left: 50%;
-  margin-left: -315px;
-}
-
-.challenges-footer ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
-}
-
-.challenges-footer li {
-  font-size: 26px;
-  padding: 20px 0;
-  width: 200px;
-  text-align: center;
-  border: 2px solid gray;
-  margin: 0 5px;
-  background: navy;
-  color: #f4f4f4;
-  border-radius: 8px;
-}
-
-.challenges-footer li:hover {
-  border: 2px solid black;
-  cursor: pointer;
-  color: red;
-}
 
 /* --------------------------------- */
 /* ------- end of Challenges ------- */

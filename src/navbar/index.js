@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-export default class Navbar extends React.Component {
+export default class Navbar extends Component {
   constructor() {
     super();
     this.state = {

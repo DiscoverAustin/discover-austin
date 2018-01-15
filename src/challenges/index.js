@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import Challenge from './Challenge';
 
-export default class Challenges extends React.Component {
+export default class Challenges extends Component {
   constructor() {
     super();
     this.state = {
@@ -10,7 +10,6 @@ export default class Challenges extends React.Component {
       challenges: [],
       achievements: [],
     };
-    this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   componentDidMount = () => {
@@ -31,7 +30,7 @@ export default class Challenges extends React.Component {
     window.scroll(0, 0);
   }
 
-  filterChallenges(challenge, index) {
+  filterChallenges = (challenge, index) => {
     if (this.state.query === 'completed') {
       if (this.state.achievements.includes(challenge.description)) {
         return <Challenge challenge={challenge} key={index} />;
@@ -56,17 +55,15 @@ export default class Challenges extends React.Component {
     );
   }
 
-  toggleMenu() {
-    this.setState({ showMenu: !this.state.showMenu });
-  }
-
   render = () => (
     <div className="component-container">
       <h1 className="pagetitle">Challenges</h1>
       <div className="challengescontainer">
-        {this.state.challenges.map((challenge, index) => (
-          this.filterChallenges(challenge, index)
-          ))}
+        {
+          this.state.challenges.map((challenge, index) => (
+            this.filterChallenges(challenge, index)
+          ))
+        }
       </div>
       <footer className="challenges-footer">
         <ul>
