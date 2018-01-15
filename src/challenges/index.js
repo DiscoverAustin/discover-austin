@@ -14,12 +14,12 @@ export default class Challenges extends Component {
 
 
   componentDidMount = () => {
-    axios.get('http://localhost:3000/api/getAllAchievements')
+    axios.get('/api/getAllAchievements')
       .then((res) => {
         this.setState({ challenges: res.data });
       })
       .catch((e) => { console.log(e); });
-    axios.get('http://localhost:3000/api/getUserAchievements')
+    axios.get('/api/getUserAchievements')
       .then((res) => {
         this.setState({ achievements: res.data });
       })
