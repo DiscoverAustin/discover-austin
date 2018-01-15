@@ -102,6 +102,14 @@ const getFeed = () => (
     })
 );
 
+const getUserFeed = facebookId => (
+  connection
+    .then(db => db.query(`SELECT * FROM achievements a INNER JOIN users_achievements ua ON a.id = ua.achievement_id INNER JOIN users u ON u.id = ua.user_id WHERE u.facebook_id=${facebookId} ORDER BY date DESC LIMIT 20`))
+    .catch((e) => {
+      console.error('Error retreiving from database!: ', e);
+    })
+);
+
 const getAllAchievements = () => (
   connection
     .then(db => db.query('SELECT * from achievements'))
@@ -123,4 +131,5 @@ module.exports = {
   updateUserTotalPoints,
   getAllAchievements,
   getFeed,
+  getUserFeed,
 };

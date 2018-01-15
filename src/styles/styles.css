@@ -57,6 +57,12 @@ a, a:visited, a:hover, a:active {
   position: fixed;
   z-index: 3;
   padding: 0 !important;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cedce7+0,596a72+100;Grey+3D+%231 */
+  background: rgb(206,220,231); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(206,220,231,1) 0%, rgba(89,106,114,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(206,220,231,1) 0%,rgba(89,106,114,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(206,220,231,1) 0%,rgba(89,106,114,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cedce7', endColorstr='#596a72',GradientType=0 ); /* IE6-9 */
 }
 
 .leaflet-container {
@@ -160,6 +166,7 @@ a, a:visited, a:hover, a:active {
 
 .sidebar-nav-menu {
   z-index: 2;
+  position: fixed;
 }
 
 .sidebar-nav-menu li {
@@ -301,13 +308,14 @@ a, a:visited, a:hover, a:active {
 /* --------------------------------- */
 
 .weather-container {
-  z-index: 2;
+  z-index: 1;
   width: 17%;
   margin-top: 111px;
   display: inline-block;
   vertical-align: top;
   font-weight: bold;
   padding-right: 40px;
+  position: fixed;
 }
 
 /* --------------------------------- */
