@@ -23,7 +23,7 @@ const App = () => (
           <Route path='/challenges' component={ Challenges } />
           <Route component={ NotFoundPage } />
         </Switch>
-        // <Weather />
+        <Weather />
       </div>
     </BrowserRouter>
   </div>

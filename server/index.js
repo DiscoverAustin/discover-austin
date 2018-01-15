@@ -111,11 +111,13 @@ passport.use(new FacebookStrategy({
 /* --------- GET Handlers ---------- */
 
 app.get('/', (req, res) => {
-  if (req.isAuthenticated() || isAuthenticated) {
+  if (isAuthenticated) {
     isAuthenticated = false;
     res.sendFile(path.join(DIST_DIR, 'index.html'));
-  } else {
+  } else if (!req.isAuthenticated()) {
     res.sendFile(path.join(DIST_DIR, 'login.html'));
+  } else {
+    res.sendFile(path.join(DIST_DIR, 'index.html'));
   }
 });
 
