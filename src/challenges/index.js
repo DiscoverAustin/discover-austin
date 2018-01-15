@@ -12,6 +12,7 @@ export default class Challenges extends Component {
     };
   }
 
+
   componentDidMount = () => {
     axios.get('http://localhost:3000/api/getAllAchievements')
       .then((res) => {
