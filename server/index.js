@@ -64,64 +64,64 @@ app.use(express.static(BUNDLE));
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(session(sessionOptions));
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(session(sessionOptions));
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 
 /* --------- Passport/Facebook Authentication Setup ---------- */
 
-passport.serializeUser((user, done) => {
-  done(null, user.facebook_id);
-});
-
-passport.deserializeUser((facebookId, done) => {
-  db.getUserByFacebookId(facebookId)
-    .then((foundUser) => {
-      done(null, foundUser);
-    })
-    .catch((e) => {
-      console.error('Error deserializing user!: ', e);
-    });
-});
-
-passport.use(new FacebookStrategy({
-  clientID: CLIENT_ID,
-  clientSecret: CLIENT_SECRET,
-  callbackURL: `${HOST}/auth/facebook/callback`,
-  profileFields: ['first_name', 'last_name', 'email', 'picture.type(large)'],
-  enableProof: true,
-}, (accessToken, refreshToken, profile, done) => {
-  const facebookId = profile.id;
-  const { familyName: lastName, givenName: firstName } = profile.name;
-  const email = profile.emails[0].value;
-  const pictureUrl = profile.photos[0].value;
-  const userInfo = {
-    firstName,
-    lastName,
-    email,
-    facebookId,
-    pictureUrl,
-  };
-  db.findOrCreateUser(userInfo)
-    .then((result) => {
-      console.log('result!; ', result);
-      done(null, result);
-    })
-    .catch((e) => { console.error(e); });
-}));
+// passport.serializeUser((user, done) => {
+//   done(null, user.facebook_id);
+// });
+//
+// passport.deserializeUser((facebookId, done) => {
+//   db.getUserByFacebookId(facebookId)
+//     .then((foundUser) => {
+//       done(null, foundUser);
+//     })
+//     .catch((e) => {
+//       console.error('Error deserializing user!: ', e);
+//     });
+// });
+//
+// passport.use(new FacebookStrategy({
+//   clientID: CLIENT_ID,
+//   clientSecret: CLIENT_SECRET,
+//   callbackURL: `${HOST}/auth/facebook/callback`,
+//   profileFields: ['first_name', 'last_name', 'email', 'picture.type(large)'],
+//   enableProof: true,
+// }, (accessToken, refreshToken, profile, done) => {
+//   const facebookId = profile.id;
+//   const { familyName: lastName, givenName: firstName } = profile.name;
+//   const email = profile.emails[0].value;
+//   const pictureUrl = profile.photos[0].value;
+//   const userInfo = {
+//     firstName,
+//     lastName,
+//     email,
+//     facebookId,
+//     pictureUrl,
+//   };
+//   db.findOrCreateUser(userInfo)
+//     .then((result) => {
+//       console.log('result!; ', result);
+//       done(null, result);
+//     })
+//     .catch((e) => { console.error(e); });
+// }));
 
 
 /* --------- GET Handlers ---------- */
 
 app.get('/', (req, res) => {
-  if (!req.isAuthenticated()) {
-    console.log('hit');
-    res.sendFile(path.join(DIST_DIR, 'login.html'));
-  } else {
-    console.log('hit2');
+  // if (!req.isAuthenticated()) {
+  //   console.log('hit');
+  //   res.sendFile(path.join(DIST_DIR, 'login.html'));
+  // } else {
+  //   console.log('hit2');
     res.sendFile(path.join(DIST_DIR, 'index.html'));
-  }
+  // }
 });
 
 app.get('/auth/facebook/callback', passport.authenticate(
