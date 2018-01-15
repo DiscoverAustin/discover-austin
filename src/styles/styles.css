@@ -56,6 +56,7 @@ a, a:visited, a:hover, a:active {
   background: #fff;
   position: fixed;
   z-index: 3;
+  padding: 0 !important;
 }
 
 .leaflet-container {
@@ -99,7 +100,7 @@ a, a:visited, a:hover, a:active {
   /*margin-top: -20px;*/
   margin-top: 61px;
   width: 100%;
-  position: absolute;
+  position: fixed;
   z-index: 2;
   display: none;
 }
@@ -387,35 +388,6 @@ a, a:visited, a:hover, a:active {
 a, a:visited, a:hover, a:active {
   text-decoration: none !important;
   color: inherit !important;
-}
-
-.front {
-  width: 100%;
-  height: 140px;
-  -webkit-transform: perspective(600px) rotateY(0deg);
-  transform: perspective(600px) rotateY(0deg);
-  -webkit-backface-visibility:hidden;
-  backface-visibility:hidden;
-  transition: -webkit-transform .5s linear 0s;
-  transition: transform .5s linear 0s;
-}
-
-.front img {
-  width: 100%;
-  height: 132px;
-}
-
-.back {
-  position: absolute;
-  width: 100%;
-  height: 132px;
-  background: silver;
-   -webkit-transform: perspective(600px) rotateY(180deg);
-  transform: perspective(600px) rotateY(180deg);
-  -webkit-backface-visibility:hidden;
-  backface-visibility:hidden;
-  transition: -webkit-transform .5s linear 0s;
-  transition: transform .5s linear 0s;
 }
 
 /*==========================
