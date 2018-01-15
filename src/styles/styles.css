@@ -160,6 +160,7 @@ a, a:visited, a:hover, a:active {
 
 .sidebar-nav-menu {
   z-index: 2;
+  position: fixed;
 }
 
 .sidebar-nav-menu li {
@@ -301,13 +302,14 @@ a, a:visited, a:hover, a:active {
 /* --------------------------------- */
 
 .weather-container {
-  z-index: 2;
+  z-index: 1;
   width: 17%;
   margin-top: 111px;
   display: inline-block;
   vertical-align: top;
   font-weight: bold;
   padding-right: 40px;
+  position: fixed;
 }
 
 /* --------------------------------- */
