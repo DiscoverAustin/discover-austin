@@ -118,6 +118,32 @@ const getAllAchievements = () => (
     })
 );
 
+const updateUserAchievement = (facebook_id, achievement_id) => (
+  // connection
+  //   .then(db => db.query(`
+  //     SELECT u.id FROM users u
+  //     WHERE facebook_id = ${facebook_id}
+  //   `))
+  //   .then((id) => { console.log('id: ', id); connection.then(db => db.query(`
+  //     INSERT INTO users_achievements (user_id, achievement_id, date)
+  //     VALUES (${id}, ${achievement_id}, 0)
+  //   `))
+  //   .catch((e) => { console.error('Error updating achievement in database!: ', e) })
+
+  connection
+    .then(db => db.query(`
+      INSERT INTO users_achievements (user_id, achievement_id, date)
+      VALUES (
+        ( SELECT id
+          FROM users
+          WHERE facebook_id=${facebook_id}),
+        ${achievement_id}, now())
+    `))
+    .catch((e) => {
+      console.error('Error updating achievement in database!: ', e);
+    })
+);
+
 module.exports = {
   connection2,
   getAllUsers,
@@ -132,4 +158,13 @@ module.exports = {
   getAllAchievements,
   getFeed,
   getUserFeed,
+  updateUserAchievement
 };
+
+
+// INSERT INTO users_achievements (user_id, achievement_id, date)
+// VALUES (
+//   ( SELECT id
+//     FROM users
+//     WHERE facebook_id=10155082185765965),
+//   2, now())

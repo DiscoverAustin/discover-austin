@@ -9,7 +9,7 @@ import AchievementIcon from '../../dist/img/achievement_icon.png';
 const Challenge = props => <div><img src={ChallengeIcon} height="30" width="30" alt="achievement icon" title={props.info.description}/></div>;
 const Achievement = props => <div><img src={AchievementIcon} height="30" width="30" alt="achievement icon" title={props.info.description}/></div>;
 
-export default class SimpleMap extends Component {
+export default class GoogleMap extends Component {
   constructor() {
     super();
     this.state = {
@@ -32,6 +32,7 @@ export default class SimpleMap extends Component {
       .catch((e) => { console.error(e); });
 
     const geoSuccess = (position) => {
+      console.log('position: ', position);
       this.setState({
         center: {
           lat: position.coords.latitude,
@@ -40,6 +41,7 @@ export default class SimpleMap extends Component {
         locationFound: true,
       });
       this.renderMarkers(this.state.map, this.state.maps, this.state.center);
+
     };
 
     const geoSuccessDebounced = _.debounce(geoSuccess, 5000);
@@ -63,6 +65,9 @@ export default class SimpleMap extends Component {
         alert(`Congrats! You have successfully completed the ${challenge.description} challenge`); // eslint-disable-line
         console.log(`distance from achievement: ${Math.round(this.calcDistance(this.state.center, challenge))}ft`);
         this.setState({ achievements: [...this.state.achievements, challenge] });
+        axios.post('/api/updateUserAchievements', { achievement: challenge.id })
+          .then((res) => { console.log('res: ', res); })
+          .catch((e) => { console.log(e); });
       }
     });
   }
