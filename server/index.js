@@ -219,6 +219,13 @@ app.post('/api/logout', (req, res) => {
   res.sendFile(path.join(DIST_DIR, 'login.html'));
 });
 
+app.post('/api/updateUserAchievements', (req, res) => {
+  const achievementId = req.body.achievement;
+  const facebookId = JSON.parse(JSON.stringify(req.user))[0].facebook_id;
+  db.updateUserAchievement(facebookId, achievementId)
+    .then(() => { console.log('success!!'); });
+  res.end();
+});
 
 /* --------- Default Fallback Route ---------- */
 
